@@ -14,12 +14,15 @@ public class EngineProcessor {
 
     @PostConstruct
     public void init(){
-        while (true){
-            if (!engineQueue.checkQueue()){
-                System.out.println("+++++++"+System.currentTimeMillis());
-                engineQueue.poll();
+        new Thread(()->{
+            while (true){
+                System.out.println("-------"+System.currentTimeMillis());
+                if (!engineQueue.checkQueue()){
+                    System.out.println("+++++++"+System.currentTimeMillis());
+                    engineQueue.poll();
+                }
             }
-        }
+        }).start();
     }
 
 }

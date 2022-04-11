@@ -16,7 +16,6 @@ public class EngineProcessor {
     public void init(){
         new Thread(()->{
             while (true){
-                System.out.println("-------"+System.currentTimeMillis());
                 if (!engineQueue.checkQueue()){
                     System.out.println("+++++++"+System.currentTimeMillis());
                     engineQueue.poll();

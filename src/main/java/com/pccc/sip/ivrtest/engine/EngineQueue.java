@@ -21,9 +21,6 @@ public class EngineQueue {
     }
 
     public ExecuteCase poll(){
-        if (queue.poll() == null){
-            return null;
-        }
         return queue.poll() == null?null: (ExecuteCase) queue.poll();
     }
 

@@ -11,4 +11,8 @@ spring:
         max-active: 10  #最大连接数
         min-idle: 2     #最小空闲数
     timeout: 15000
-
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://115.159.53.71:3306/app_db?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 3edc$RFV%TGB

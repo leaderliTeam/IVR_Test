@@ -1,5 +1,8 @@
-package com.pccc.sip.ivrtest.resolve;
+package com.pccc.sip.ivrtest.resolve.core;
 
+import com.pccc.sip.ivrtest.resolve.Result;
+import com.pccc.sip.ivrtest.resolve.core.ResolveAction;
+import com.pccc.sip.ivrtest.resolve.core.ResolveChain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

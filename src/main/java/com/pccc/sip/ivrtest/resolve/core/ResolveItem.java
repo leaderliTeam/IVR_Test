@@ -1,4 +1,4 @@
-package com.pccc.sip.ivrtest.resolve;
+package com.pccc.sip.ivrtest.resolve.core;
 
 import com.pccc.sip.ivrtest.resolve.resolver.Resolver;
 

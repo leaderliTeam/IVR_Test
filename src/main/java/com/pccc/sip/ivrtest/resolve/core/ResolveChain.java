@@ -1,4 +1,4 @@
-package com.pccc.sip.ivrtest.resolve;
+package com.pccc.sip.ivrtest.resolve.core;
 
 import java.util.ArrayList;
 import java.util.List;

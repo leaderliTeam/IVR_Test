@@ -1,5 +1,7 @@
-package com.pccc.sip.ivrtest.resolve;
+package com.pccc.sip.ivrtest.resolve.core;
 
+import com.pccc.sip.ivrtest.resolve.Result;
+import com.pccc.sip.ivrtest.resolve.Rule;
 import com.pccc.sip.ivrtest.resolve.resolver.Resolver;
 import com.pccc.sip.ivrtest.resolve.resolver.ResolverFactory;
 import com.pccc.sip.ivrtest.util.GsonUtil;

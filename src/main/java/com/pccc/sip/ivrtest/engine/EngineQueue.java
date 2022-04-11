@@ -11,19 +11,19 @@ public class EngineQueue {
 
     private static BlockingQueue<ExecuteCase> queue = new LinkedBlockingQueue<>();
 
-    public void put(ExecuteCase executeCase)  {
-        try{
+    public void put(ExecuteCase executeCase) {
+        try {
             queue.put(executeCase);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public ExecuteCase poll(){
-        return queue.poll() == null?null: queue.poll();
+    public ExecuteCase poll() {
+        return queue.poll() == null ? null : queue.poll();
     }
 
-    public boolean checkQueue(){
+    public boolean checkQueue() {
         return queue.isEmpty();
     }
 

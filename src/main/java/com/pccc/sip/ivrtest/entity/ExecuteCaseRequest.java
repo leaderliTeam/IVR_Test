@@ -1,6 +1,6 @@
 package com.pccc.sip.ivrtest.entity;
 
-public class ExecuteCase {
+public class ExecuteCaseRequest extends BaseRequest{
 
     private String id;
     private String caseDesc;

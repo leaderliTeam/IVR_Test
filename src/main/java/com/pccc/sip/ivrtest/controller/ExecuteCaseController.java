@@ -1,7 +1,8 @@
 package com.pccc.sip.ivrtest.controller;
 
 import com.pccc.sip.ivrtest.engine.EngineRedisQueue;
-import com.pccc.sip.ivrtest.entity.ExecuteCase;
+import com.pccc.sip.ivrtest.entity.ExecuteCaseRequest;
+import com.pccc.sip.ivrtest.entity.ExecuteCaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +13,14 @@ import java.util.List;
 public class ExecuteCaseController {
 
     @Autowired
-    private EngineRedisQueue engineQueue;
+    private EngineRedisQueue engineRedisQueue;
 
     @PostMapping("/execute")
-    public int executeCases(@RequestBody List<ExecuteCase> executeCases){
-        engineQueue.put(executeCases);
-        return executeCases.size();
+    public ExecuteCaseResponse executeCases(@RequestBody List<ExecuteCaseRequest> executeCaseRequests){
+        engineRedisQueue.put(executeCaseRequests);
+        ExecuteCaseResponse executeCaseResponse = new ExecuteCaseResponse();
+        executeCaseResponse.setSize(executeCaseRequests.size());
+        return executeCaseResponse;
     }
 
 }

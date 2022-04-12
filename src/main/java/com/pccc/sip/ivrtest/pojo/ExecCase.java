@@ -102,4 +102,20 @@ public class ExecCase {
     public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
     }
+
+    @Override
+    public String toString() {
+        return "ExecCase{" +
+                "id='" + id + '\'' +
+                ", batch=" + batch +
+                ", caseDesc='" + caseDesc + '\'' +
+                ", params='" + params + '\'' +
+                ", isUsed='" + isUsed + '\'' +
+                ", testCaseId='" + testCaseId + '\'' +
+                ", preExecCaseId='" + preExecCaseId + '\'' +
+                ", isArchived='" + isArchived + '\'' +
+                ", execTimes=" + execTimes +
+                ", lastTime=" + lastTime +
+                '}';
+    }
 }

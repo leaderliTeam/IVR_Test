@@ -1,7 +1,7 @@
 package com.pccc.sip.ivrtest.engine;
 
 import com.pccc.sip.ivrtest.config.JedisTemplate;
-import com.pccc.sip.ivrtest.entity.ExecuteCase;
+import com.pccc.sip.ivrtest.entity.ExecuteCaseRequest;
 import com.pccc.sip.ivrtest.util.GsonUtil;
 import io.leaderli.litil.meta.Lino;
 import org.slf4j.Logger;
@@ -21,14 +21,14 @@ public class EngineRedisQueue {
     @Autowired
     private JedisTemplate jedisTemplate;
 
-    public void put(List<ExecuteCase> executeCases) {
-        Lino.of(executeCases).get().forEach(executeCase -> {
-            jedisTemplate.lpush(EXECUTE_CASES_KEY, GsonUtil.GsonString(executeCase));
+    public void put(List<ExecuteCaseRequest> executeCaseRequests) {
+        Lino.of(executeCaseRequests).get().forEach(executeCaseRequest -> {
+            jedisTemplate.lpush(EXECUTE_CASES_KEY, GsonUtil.GsonString(executeCaseRequest));
         });
     }
 
-    public ExecuteCase poll() {
-        return GsonUtil.GsonToBean(jedisTemplate.rpop(EXECUTE_CASES_KEY), ExecuteCase.class);
+    public ExecuteCaseRequest poll() {
+        return GsonUtil.GsonToBean(jedisTemplate.rpop(EXECUTE_CASES_KEY), ExecuteCaseRequest.class);
     }
 
     public boolean exists() {

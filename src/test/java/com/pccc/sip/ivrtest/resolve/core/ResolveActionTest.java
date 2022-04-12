@@ -1,8 +1,11 @@
-package com.pccc.sip.ivrtest.resolve;
+package com.pccc.sip.ivrtest.resolve.core;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringSubstitutor;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +13,7 @@ public class ResolveActionTest {
 
     @Test
     public void test1() {
-        String regex = "\\$\\{(.*?)\\}";
+        String regex = "\\$\\{(.*?)}";
 
         Pattern compile = Pattern.compile(regex);
         Matcher matcher = compile.matcher("123${abc}9089012${cba}");
@@ -27,5 +30,19 @@ public class ResolveActionTest {
         System.out.println(replace);
     }
 
+    @Test
+    public void test3() {
+        String str = "123${abc}9089012${cba}";
+
+        Map<String, String> map = new HashMap<>();
+        map.put("abc", "---");
+        map.put("cba", "+++");
+
+        StringSubstitutor stringSubstitutor = new StringSubstitutor(map);
+
+        String msg = stringSubstitutor.replace(str);
+
+        System.out.println(msg);
+    }
 
 }

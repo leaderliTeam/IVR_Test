@@ -1,11 +1,13 @@
 package com.pccc.sip.ivrtest.entity;
 
+import com.google.gson.JsonObject;
+
 public class ExecuteCaseRequest extends BaseRequest{
 
     private String id;
     private String caseDesc;
     private String executeBatchNo;
-    private String variableData;
+    private JsonObject variableData;
     private String used;
     private String caseId;
     private String executeId;
@@ -35,11 +37,11 @@ public class ExecuteCaseRequest extends BaseRequest{
         this.executeBatchNo = executeBatchNo;
     }
 
-    public String getVariableData() {
+    public JsonObject getVariableData() {
         return variableData;
     }
 
-    public void setVariableData(String variableData) {
+    public void setVariableData(JsonObject variableData) {
         this.variableData = variableData;
     }
 

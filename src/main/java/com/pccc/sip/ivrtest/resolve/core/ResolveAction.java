@@ -7,27 +7,24 @@ import com.pccc.sip.ivrtest.resolve.resolver.Resolver;
 import com.pccc.sip.ivrtest.resolve.resolver.ResolverFactory;
 import com.pccc.sip.ivrtest.util.GsonUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringSubstitutor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class ResolveAction {
-
-    private String regex = "\\$\\{(.*?)\\}";
 
     private static ResolverFactory factory = new ResolverFactory();
 
     public ResolveResult resolveExecuteResult(Object obj, ResolveChain chain) {
         ExecuteResult executeResult = new ExecuteResult(obj);
+        ResolveResult resolveResult = new ResolveResult();
 
         List<ResolveItem> items = chain.getItems();
 
-        ResolveResult resolveResult = executeResult.match(items);
+        executeResult.match(resolveResult, items);
 
         return resolveResult;
     }
@@ -58,28 +55,12 @@ public class ResolveAction {
         return resolveChain;
     }
 
-    private List<String> getKeys(String targetStr) {
-        List<String> keys = new ArrayList<>();
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(targetStr);
-        while (matcher.find()) {
-            keys.add(matcher.group(1));
-        }
-
-        return keys;
-    }
-
     private String replaceKeys(String targetStr, Map<String, String> params) {
-        List<String> keys = getKeys(targetStr);
+        StringSubstitutor stringSubstitutor = new StringSubstitutor(params);
 
-        for (String key : keys) {
-            String placeholder = "${" + key + "}";
-            String value = params.get(key);
-            targetStr = StringUtils.replace(targetStr, placeholder, value);
-        }
+        String msg = stringSubstitutor.replace(targetStr);
 
-        return targetStr;
+        return msg;
     }
 
 }

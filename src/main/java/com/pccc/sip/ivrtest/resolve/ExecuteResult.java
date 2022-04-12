@@ -12,11 +12,11 @@ public class ExecuteResult {
         this.obj = obj;
     }
 
-    public ResolveResult match(ResolveItem item) {
+    public ResolveResult match(ResolveResult resolveResult, ResolveItem item) {
         return null;
     }
 
-    public ResolveResult match(List<ResolveItem> items) {
+    public ResolveResult match(ResolveResult resolveResult, List<ResolveItem> items) {
         return null;
     }
 }

@@ -18,6 +18,13 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>io.leaderli</groupId>
+            <artifactId>litil</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -52,6 +59,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
+
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>

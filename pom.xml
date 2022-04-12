@@ -79,6 +79,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.leaderli</groupId>
+            <artifactId>litil</artifactId>
+            <version>1.0.7</version>
+        </dependency>
     </dependencies>
 
     <build>

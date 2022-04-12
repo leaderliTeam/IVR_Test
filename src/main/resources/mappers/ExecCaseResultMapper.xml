@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pccc.sip.ivrtest.mapper.ExecCaseResultMapper">
+    <resultMap id="BaseResultMap" type="com.pccc.sip.ivrtest.pojo.ExecCaseResult">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="exec_case_id" property="execCaseId" jdbcType="VARCHAR"/>
+        <result column="exec_result" property="execResult" jdbcType="VARCHAR"/>
+        <result column="exec_state" property="execState" jdbcType="VARCHAR"/>
+        <result column="tran_info" property="tranInfo" jdbcType="VARCHAR"/>
+        <result column="call_id" property="callId" jdbcType="VARCHAR"/>
+        <result column="start_time" property="startTime" jdbcType="DATE"/>
+        <result column="end_time" property="endTime" jdbcType="DATE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , exec_case_id, exec_result, exec_state, tran_info, call_id, start_time, end_time
+    </sql>
+    <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from exec_case_result
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -16,3 +16,6 @@ spring:
     url: jdbc:mysql://115.159.53.71:3306/app_db?characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: 3edc$RFV%TGB
+
+mybatis-plus:
+  mapper-locations: classpath:/mappers/**.xml

@@ -1,6 +1,7 @@
 package com.pccc.sip.ivrtest.resolve.core;
 
-import com.pccc.sip.ivrtest.resolve.Result;
+import com.pccc.sip.ivrtest.resolve.ExecuteResult;
+import com.pccc.sip.ivrtest.resolve.ResolveResult;
 import com.pccc.sip.ivrtest.resolve.Rule;
 import com.pccc.sip.ivrtest.resolve.resolver.Resolver;
 import com.pccc.sip.ivrtest.resolve.resolver.ResolverFactory;
@@ -21,13 +22,18 @@ public class ResolveAction {
 
     private static ResolverFactory factory = new ResolverFactory();
 
-    public Result resolveResult(Object obj, ResolveChain chain) {
+    public ResolveResult resolveExecuteResult(Object obj, ResolveChain chain) {
+        ExecuteResult executeResult = new ExecuteResult(obj);
 
-        return null;
+        List<ResolveItem> items = chain.getItems();
+
+        ResolveResult resolveResult = executeResult.match(items);
+
+        return resolveResult;
     }
 
     public ResolveChain resolveRule(String ruleJson, Map<String, String> params) {
-        List<Rule> list = GsonUtil.GsonToBean(ruleJson, List.class);
+        List<Rule> list = GsonUtil.GsonToList(ruleJson, Rule.class);
 
         ResolveChain resolveChain = new ResolveChain();
 

@@ -1,6 +1,6 @@
 package com.pccc.sip.ivrtest.resolve;
 
-public class Result {
+public class ResolveResult {
 
     private boolean isSuccess;
 

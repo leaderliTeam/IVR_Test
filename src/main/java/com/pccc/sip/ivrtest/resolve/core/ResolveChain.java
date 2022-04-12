@@ -10,4 +10,9 @@ public class ResolveChain {
     public void add(ResolveItem resolveItem) {
         list.add(resolveItem);
     }
+
+    public List<ResolveItem> getItems() {
+        return list;
+    }
+
 }

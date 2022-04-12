@@ -2,7 +2,7 @@ package com.pccc.sip.ivrtest.resolve.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,16 @@ public class ResolveActionTest {
             System.out.println(matcher.groupCount());
             System.out.println(group);
         }
+
+    }
+
+    @Test
+    public void test3() {
+        Map<String, String> values = new HashMap<>();
+        values.put("abc","---->");
+        values.put("cba","+++++++++++");
+        String message = StringSubstitutor.replace("123${abc}9089012${cba}", values);
+        System.out.println(message);
     }
 
     @Test
@@ -31,7 +41,7 @@ public class ResolveActionTest {
     }
 
     @Test
-    public void test3() {
+    public void test4() {
         String str = "123${abc}9089012${cba}";
 
         Map<String, String> map = new HashMap<>();
@@ -39,6 +49,21 @@ public class ResolveActionTest {
         map.put("cba", "+++");
 
         StringSubstitutor stringSubstitutor = new StringSubstitutor(map);
+
+        String msg = stringSubstitutor.replace(str);
+
+        System.out.println(msg);
+    }
+
+    @Test
+    public void test5() {
+        String str = "123#abc#abc#cba#123";
+
+        Map<String, String> map = new HashMap<>();
+        map.put("abc", "---");
+        map.put("cba", "+++");
+
+        StringSubstitutor stringSubstitutor = new StringSubstitutor(map, "#", "#");
 
         String msg = stringSubstitutor.replace(str);
 

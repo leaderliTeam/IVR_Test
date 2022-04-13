@@ -1,5 +1,6 @@
 package com.pccc.sip.ivrtest.controller;
 
+import com.pccc.sip.ivrtest.entity.BaseResponse;
 import com.pccc.sip.ivrtest.pojo.TestCase;
 import com.pccc.sip.ivrtest.service.TestCaseService;
 import org.apache.commons.lang3.StringUtils;
@@ -9,54 +10,53 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/testCase")
 public class TestCaseController {
     @Autowired
     private TestCaseService testCaseService;
 
+    BaseResponse response = new BaseResponse();
+
     //增
     @PostMapping(value = "/add")
     public Object add(@RequestBody TestCase testCase) {
-        Map map = new HashMap();
         if (StringUtils.equals(String.valueOf(testCaseService.addTestCase(testCase)), "1")) {
-            map.put("code", "0");
-            map.put("msg", "success");
-            return map;
+            return response;
         } else {
-            map.put("code", "-1");
-            map.put("msg", "fail");
-            return map;
+            response.setCode(-1);
+            response.setMsg("fail");
+            return response;
         }
     }
 
     //改
     @PostMapping(value = "/update")
     public Object update(@RequestBody TestCase testCase) {
-        Map map = new HashMap();
         if (StringUtils.equals(String.valueOf(testCaseService.updateTestCase(testCase)), "1")) {
-            map.put("code", "0");
-            map.put("msg", "success");
-            return map;
+            return response;
         } else {
-            map.put("code", "-1");
-            map.put("msg", "fail");
-            return map;
+            response.setCode(-1);
+            response.setMsg("fail");
+            return response;
         }
     }
 
     //删
     @PostMapping(value = "/delete")
-    public Object delete(@RequestBody String id) {
-        return testCaseService.deleteTestCaseById(id);
+    public Object delete(@RequestBody TestCase testCase) {
+        if (StringUtils.equals(String.valueOf(testCaseService.deleteTestCaseById(testCase.getId())), "1")) {
+            return response;
+        } else {
+            response.setCode(-1);
+            response.setMsg("fail");
+            return response;
+        }
     }
 
     // 查
     @PostMapping(value = "/queryList")
-    public Object getUserByName(@RequestBody String id) {
+    public TestCase getUserByName(@RequestBody String id) {
         return testCaseService.findTestCaseById(id);
     }
 }

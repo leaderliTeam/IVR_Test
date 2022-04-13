@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pccc.sip.ivrtest.mapper.TestCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.pccc.sip.ivrtest.pojo.TestCase" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="case_desc" property="caseDesc" jdbcType="VARCHAR" />
+    <result column="input_seq" property="inputSeq" jdbcType="VARCHAR" />
+    <result column="is_used" property="used" jdbcType="VARCHAR" />
+    <result column="demand_id" property="reqId" jdbcType="VARCHAR" />
+    <result column="principal_test" property="tester" jdbcType="VARCHAR" />
+    <result column="principal_develop" property="developer" jdbcType="VARCHAR" />
+    <result column="pre_case_id" property="frontCaseId" jdbcType="VARCHAR" />
+    <result column="edit_state" property="editState" jdbcType="VARCHAR" />
+    <result column="exec_times" property="execTimes" jdbcType="INTEGER" />
+    <result column="last_time" property="lastExecuteTime" jdbcType="DATE" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_desc, input_seq, is_used, demand_id, principal_test, principal_develop, 
+    pre_case_id, edit_state, exec_times, last_time, tag
+  </sql>
+  <update id="updateTestCaseById" parameterType="com.pccc.sip.ivrtest.pojo.TestCase" >
+    update test_case
+    set exec_times = exec_times + 1,
+      last_time = #{lastExecuteTime,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -24,5 +24,10 @@
         from exec_case
         where id = #{id,jdbcType=VARCHAR}
     </select>
-
+    <update id="updateExecCaseById" parameterType="com.pccc.sip.ivrtest.pojo.ExecCase" >
+        update exec_case
+        set exec_times = exec_times + 1,
+            last_time = #{lastTime,jdbcType=DATE}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

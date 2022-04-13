@@ -6,17 +6,24 @@ import java.util.List;
 
 public class ExecuteResult {
 
-    private Object obj;
+    private String execResult;
 
-    public ExecuteResult(Object obj) {
-        this.obj = obj;
+    public ExecuteResult(String execResult) {
+        this.execResult = execResult;
     }
 
     public ResolveResult match(ResolveResult resolveResult, ResolveItem item) {
-        return null;
+
+        return resolveResult;
     }
 
     public ResolveResult match(ResolveResult resolveResult, List<ResolveItem> items) {
-        return null;
+        for (ResolveItem item : items) {
+            match(resolveResult, item);
+            if (resolveResult.isFail()) {
+                break;
+            }
+        }
+        return resolveResult;
     }
 }

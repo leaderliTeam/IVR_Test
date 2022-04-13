@@ -18,8 +18,8 @@ public class ResolveAction {
 
     private static ResolverFactory factory = new ResolverFactory();
 
-    public ResolveResult resolveExecuteResult(Object obj, ResolveChain chain) {
-        ExecuteResult executeResult = new ExecuteResult(obj);
+    public ResolveResult resolveExecuteResult(String execResult, ResolveChain chain) {
+        ExecuteResult executeResult = new ExecuteResult(execResult);
         ResolveResult resolveResult = new ResolveResult();
 
         List<ResolveItem> items = chain.getItems();

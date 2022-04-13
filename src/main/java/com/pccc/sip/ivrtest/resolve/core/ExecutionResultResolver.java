@@ -12,13 +12,13 @@ public class ExecutionResultResolver {
     @Autowired
     private ResolveAction resolveAction;
 
-    public ResolveResult resolve(Object obj, String ruleJson, Map<String, String> params) {
+    public ResolveResult resolve(String execResult, String ruleJson, Map<String, String> params) {
 
         // 获取解析器
         ResolveChain resolveChain = resolveAction.resolveRule(ruleJson, params);
 
         // 对执行结果进行解析
-        ResolveResult result = resolveAction.resolveExecuteResult(obj, resolveChain);
+        ResolveResult result = resolveAction.resolveExecuteResult(execResult, resolveChain);
 
         return result;
 

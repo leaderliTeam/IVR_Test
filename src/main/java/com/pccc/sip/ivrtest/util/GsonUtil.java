@@ -1,9 +1,10 @@
 package com.pccc.sip.ivrtest.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GsonUtil {
@@ -47,11 +48,15 @@ public class GsonUtil {
     }
 
     public static <T> List<T> GsonToList(String gsonString, Class<T> cls) {
-        List<T> list = null;
-        if (gson != null) {
-            //根据泛型返回解析指定的类型,TypeToken<List<T>>{}.getType()获取返回类型
-            list = gson.fromJson(gsonString, new TypeToken<List<T>>() {
-            }.getType());
+        List<T> list = new ArrayList<T>();
+        try {
+            Gson gson = new Gson();
+            JsonArray arry = new JsonParser().parse(gsonString).getAsJsonArray();
+            for (JsonElement jsonElement : arry) {
+                list.add(gson.fromJson(jsonElement, cls));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }

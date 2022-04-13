@@ -1,0 +1,10 @@
+-- app_db.params_data definition
+
+CREATE TABLE `params_data` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `acc_no` varchar(20) NOT NULL COMMENT '卡号',
+  `para_code` varchar(20) NOT NULL COMMENT '变量码',
+  `para_value` varchar(20) NOT NULL COMMENT '变量值',
+  `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='变量列表数据表';

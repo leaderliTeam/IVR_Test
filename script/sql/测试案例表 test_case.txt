@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS `test_case` (
+  `id` varchar(32) NOT NULL COMMENT '测试案例编号',
+  `case_desc` varchar(128) NOT NULL COMMENT '案例描述',
+  `input_seq` varchar(128) NOT NULL COMMENT '输入序列',
+  `is_used` varchar(1) NOT NULL COMMENT '是否弃用',
+  `demand_id` varchar(128) DEFAULT NULL COMMENT '关联的需求编号',
+  `principal_test` varchar(32) NOT NULL COMMENT '测试负责人',
+  `principal_develop` varchar(32) NOT NULL COMMENT '开发负责人',
+  `pre_case_id` varchar(32) DEFAULT NULL COMMENT '前置测试案例编号',
+  `edit_state` varchar(1) NOT NULL DEFAULT '0' COMMENT '编辑状态',
+  `exec_times` int(4) NOT NULL COMMENT '执行次数',
+  `last_time` date NOT NULL COMMENT '最后执行时间',
+  `tag` varchar(128) DEFAULT NULL COMMENT '标签',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='测试案例表';

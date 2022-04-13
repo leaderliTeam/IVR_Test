@@ -1,0 +1,9 @@
+-- app_db.data_dictionary definition
+
+CREATE TABLE `data_dictionary` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `dict_code` varchar(20) NOT NULL COMMENT '字典码',
+  `dict_value` varchar(20) NOT NULL COMMENT '字典值',
+  `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典表';

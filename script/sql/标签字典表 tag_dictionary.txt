@@ -1,0 +1,8 @@
+-- app_db.tag_dictionary definition
+
+CREATE TABLE `tag_dictionary` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `text_comment` varchar(128) NOT NULL COMMENT '文本描述',
+  `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标签字典表';

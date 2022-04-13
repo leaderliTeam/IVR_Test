@@ -1,0 +1,10 @@
+-- app_db.result_and_rule definition
+
+CREATE TABLE `result_and_rule` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `test_case_id` varchar(32) NOT NULL COMMENT '测试案例编号',
+  `order_id` varchar(6) NOT NULL COMMENT '顺序号',
+  `rule_type` varchar(128) NOT NULL COMMENT '规则类型',
+  `rule_value` varchar(1024) NOT NULL COMMENT '规则数值',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='预期结果规则表';

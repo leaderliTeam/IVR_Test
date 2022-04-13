@@ -21,13 +21,14 @@ public class EngineRedisQueue {
     @Autowired
     private JedisTemplate jedisTemplate;
 
-    public void put(List<ExecuteCaseRequest> executeCaseRequests) {
-        Lino.of(executeCaseRequests).get().forEach(executeCaseRequest -> {
+    public int put(List<ExecuteCaseRequest> executeCaseRequests) {
+        executeCaseRequests.forEach(executeCaseRequest -> {
             jedisTemplate.lpush(EXECUTE_CASES_KEY, GsonUtil.GsonString(executeCaseRequest));
         });
+        return executeCaseRequests.size();
     }
 
-    public ExecuteCaseRequest poll() {
+    public ExecuteCaseRequest pop() {
         return GsonUtil.GsonToBean(jedisTemplate.rpop(EXECUTE_CASES_KEY), ExecuteCaseRequest.class);
     }
 

@@ -30,23 +30,9 @@ public class ExecuteCaseControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content("[\n" +
                 "    {\n" +
-                "        \"id\": \"IVRE202202110001\",\n" +
-                "        \"caseId\": \"IVRT2204010001\",\n" +
-                "        \"executeId\": \"IVRE2204010002\",\n" +
-                "        \"used\": \"1\",\n" +
-                "        \"variableData\": {\n" +
-                "            \"AcNo\": \"62222222555|65555232322222\",\n" +
-                "            \"PassWord\": \"111111|222222|333333\",\n" +
-                "            \"Asr\": \"查询账单|查询额度\",\n" +
-                "            \"FlowCode\": \"flowcode_10008\",\n" +
-                "            \"balance\": \"100\",\n" +
-                "            \"debt\": \"1000\"\n" +
-                "        }\n" +
-                "    },\n" +
-                "    {\n" +
-                "        \"id\": \"IVRE2204010004\",\n" +
-                "        \"caseId\": \"IVRT2204010002\",\n" +
-                "        \"executeId\": \"IVRE2204010003\",\n" +
+                "        \"id\": \"IVRE202202110002\",\n" +
+                "        \"caseId\": \"IVRT2204020001\",\n" +
+                "        \"executeId\": \"IVRE202202110001\",\n" +
                 "        \"used\": \"1\",\n" +
                 "        \"variableData\": {\n" +
                 "            \"AcNo\": \"62222222555|65555232322222\",\n" +

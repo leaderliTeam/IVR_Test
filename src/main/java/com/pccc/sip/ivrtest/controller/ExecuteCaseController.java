@@ -17,9 +17,9 @@ public class ExecuteCaseController {
 
     @PostMapping("/execute")
     public ExecuteCaseResponse executeCases(@RequestBody List<ExecuteCaseRequest> executeCaseRequests){
-        engineRedisQueue.put(executeCaseRequests);
+        int size = engineRedisQueue.put(executeCaseRequests);
         ExecuteCaseResponse executeCaseResponse = new ExecuteCaseResponse();
-        executeCaseResponse.setSize(executeCaseRequests.size());
+        executeCaseResponse.setSize(size);
         return executeCaseResponse;
     }
 

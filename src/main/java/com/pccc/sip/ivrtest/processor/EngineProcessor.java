@@ -25,7 +25,7 @@ public class EngineProcessor {
             while (true) {
                 if (engineRedisQueue.exists() && engineRedisQueue.size() > 0 ) {
                     try{
-                        executeEngine.executeCases(Lino.of(engineRedisQueue).map(EngineRedisQueue::poll).get());
+                        executeEngine.executeCases(Lino.of(engineRedisQueue).map(EngineRedisQueue::pop).get());
                     }catch (Exception e){
                         logger.error(" engineProcessor error ", e);
                     }

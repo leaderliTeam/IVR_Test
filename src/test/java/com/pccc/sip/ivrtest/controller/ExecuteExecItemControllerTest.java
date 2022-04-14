@@ -35,7 +35,7 @@ public class ExecuteExecItemControllerTest {
                 "        \"executeId\": \"IVRE202202110001\",\n" +
                 "        \"used\": \"1\",\n" +
                 "        \"variableData\": {\n" +
-                "            \"AcNo\": \"62222222555|65555232322222\",\n" +
+                "            \"AccNo\": \"62222222555|65555232322222\",\n" +
                 "            \"PassWord\": \"111111|222222|333333\",\n" +
                 "            \"Asr\": \"查询账单|查询额度\",\n" +
                 "            \"FlowCode\": \"flowcode_10008\",\n" +

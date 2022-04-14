@@ -5,10 +5,7 @@ import com.pccc.sip.ivrtest.pojo.TestCase;
 import com.pccc.sip.ivrtest.service.TestCaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/testCase")
@@ -56,7 +53,7 @@ public class TestCaseController {
 
     // 查
     @PostMapping(value = "/queryList")
-    public TestCase getUserByName(@RequestBody String id) {
-        return testCaseService.findTestCaseById(id);
+    public TestCase getUserByName(@RequestBody TestCase testCase) {
+        return testCaseService.findTestCaseById(testCase.getId());
     }
 }

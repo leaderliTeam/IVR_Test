@@ -7,5 +7,6 @@ import com.pccc.sip.ivrtest.pojo.ExecCaseResult;
 public interface ExecCaseResultMapper extends BaseMapper<ExecCaseResult> {
 
     ExecCaseResult queryById(String id);
+    int addExecCaseResult(ExecCaseResult execCaseResult);
 
 }

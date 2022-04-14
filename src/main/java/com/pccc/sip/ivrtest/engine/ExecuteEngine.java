@@ -1,11 +1,13 @@
 package com.pccc.sip.ivrtest.engine;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.pccc.sip.ivrtest.entity.ExecuteCaseRequest;
 import com.pccc.sip.ivrtest.mapper.ExecCaseMapper;
 import com.pccc.sip.ivrtest.mapper.ExecCaseResultMapper;
 import com.pccc.sip.ivrtest.mapper.TestCaseMapper;
 import com.pccc.sip.ivrtest.pojo.ExecCase;
+import com.pccc.sip.ivrtest.pojo.ExecCaseResult;
 import com.pccc.sip.ivrtest.pojo.TestCase;
 import com.pccc.sip.ivrtest.service.ExecuteEngineService;
 import com.pccc.sip.ivrtest.util.GsonUtil;
@@ -16,6 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,13 +36,32 @@ public class ExecuteEngine {
 
     public void executeCases(ExecuteCaseRequest executeCaseRequest) {
         logger.info(executeCaseRequest.getId());
+        if (!StringUtils.equals("1",executeCaseRequest.getUsed())){
+            return;
+        }
         List<JsonObject> executeInfo = new ArrayList<>();
         JsonObject request = new JsonObject();
-        execute(executeInfo,executeCaseRequest,request,false);
+        Date startDate = new Date();
+        ExecCaseResult execCaseResult = new ExecCaseResult();
+        execCaseResult.setExecCaseId(executeCaseRequest.getId());
+        try {
+            execute(executeInfo,executeCaseRequest,request,false);
+            execCaseResult.setCallId("");
+            execCaseResult.setExecInfo(GsonUtil.GsonString(executeInfo));
+            //TODO 执行详情规则解析
+            HashMap<String,String> execResult = new HashMap<>();
 
-        //TODO 执行详情规则解析
-
-        //TODO 更新执行结果表
+            //TODO 更新执行结果表
+            execCaseResult.setExecState("S");
+            execCaseResult.setExecResult(GsonUtil.GsonString(execResult));
+        } catch (Exception e) {
+            logger.error(" ExecuteEngine executeCases execute error ",e);
+            execCaseResult.setExecState("F");
+        }finally {
+            execCaseResult.setStartTime(startDate);
+            execCaseResult.setEndTime(new Date());
+            executeEngineService.addExecCaseResult(execCaseResult);
+        }
 
     }
 
@@ -97,14 +121,14 @@ public class ExecuteEngine {
      * @param inputSeq 序列
      * @return
      */
-    private String[] fillData(JsonObject variableData, String inputSeq) {
+    private String[] fillData(HashMap<String,String> variableData, String inputSeq) {
         HashMap<String, Integer> map = new HashMap<>();
         String[] strings = inputSeq.split("\\|");
         for (int i = 0; i < strings.length; i++) {
             String key = strings[i];
             if (variableData.keySet().contains(key)) {
                 int index = map.get(key) == null ? 0 : map.get(key);
-                String[] values = variableData.get(key).getAsString().split("\\|");
+                String[] values = variableData.get(key).split("\\|");
                 strings[i] = values[index];
                 map.put(key,index+1);
             }
@@ -118,7 +142,7 @@ public class ExecuteEngine {
         executeCaseRequest.setCaseId(execCase.getTestCaseId());
         executeCaseRequest.setExecuteId(execCase.getPreExecCaseId());
         executeCaseRequest.setUsed(execCase.getIsUsed());
-        executeCaseRequest.setVariableData(GsonUtil.GsonToBean(execCase.getParams(),JsonObject.class));
+        executeCaseRequest.setVariableData(GsonUtil.GsonToBean(execCase.getParams(),HashMap.class));
         return executeCaseRequest;
     }
 

@@ -2,12 +2,14 @@ package com.pccc.sip.ivrtest.entity;
 
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
+
 public class ExecuteCaseRequest extends BaseRequest{
 
     private String id;
     private String caseDesc;
     private String executeBatchNo;
-    private JsonObject variableData;
+    private HashMap<String,String> variableData;
     private String used;
     private String caseId;
     private String executeId;
@@ -37,11 +39,11 @@ public class ExecuteCaseRequest extends BaseRequest{
         this.executeBatchNo = executeBatchNo;
     }
 
-    public JsonObject getVariableData() {
+    public HashMap<String,String> getVariableData() {
         return variableData;
     }
 
-    public void setVariableData(JsonObject variableData) {
+    public void setVariableData(HashMap<String,String> variableData) {
         this.variableData = variableData;
     }
 

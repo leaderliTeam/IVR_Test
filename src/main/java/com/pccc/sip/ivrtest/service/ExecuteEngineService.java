@@ -14,6 +14,6 @@ public interface ExecuteEngineService {
 
     public void modifyCaseById(TestCase testCase,ExecCase execCase);
 
-    public int addExecCaseResult(ExecCaseResult execCaseResult);
+    public void addExecCaseResult(ExecCaseResult execCaseResult);
 
 }

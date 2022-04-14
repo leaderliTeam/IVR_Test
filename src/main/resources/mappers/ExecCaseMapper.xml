@@ -11,7 +11,7 @@
         <result column="pre_exec_case_id" property="preExecCaseId" jdbcType="VARCHAR"/>
         <result column="is_archived" property="isArchived" jdbcType="VARCHAR"/>
         <result column="exec_times" property="execTimes" jdbcType="INTEGER"/>
-        <result column="last_time" property="lastTime" jdbcType="DATE"/>
+        <result column="last_time" property="lastTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
@@ -27,7 +27,7 @@
     <update id="updateExecCaseById" parameterType="com.pccc.sip.ivrtest.pojo.ExecCase" >
         update exec_case
         set exec_times = exec_times + 1,
-            last_time = #{lastTime,jdbcType=DATE}
+            last_time = #{lastTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>

@@ -19,6 +19,16 @@ public class ExecCaseResult {
 
     private Date endTime;
 
+    private String execInfo;
+
+    public String getExecInfo() {
+        return execInfo;
+    }
+
+    public void setExecInfo(String execInfo) {
+        this.execInfo = execInfo;
+    }
+
     public Integer getId() {
         return id;
     }

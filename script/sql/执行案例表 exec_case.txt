@@ -8,6 +8,6 @@ CREATE TABLE IF NOT EXISTS `exec_case` (
   `pre_exec_case_id` varchar(32) DEFAULT NULL COMMENT '前置执行案例编号',
   `is_archived` varchar(1) NOT NULL COMMENT '是否归档',
   `exec_times` int(4) NOT NULL COMMENT '执行次数',
-  `last_time` date NOT NULL COMMENT '最后执行时间',
+  `last_time` datetime NOT NULL COMMENT '最后执行时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='执行案例表';

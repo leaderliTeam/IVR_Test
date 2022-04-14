@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `test_case` (
   `pre_case_id` varchar(32) DEFAULT NULL COMMENT '前置测试案例编号',
   `edit_state` varchar(1) NOT NULL DEFAULT '0' COMMENT '编辑状态',
   `exec_times` int(4) NOT NULL COMMENT '执行次数',
-  `last_time` date NOT NULL COMMENT '最后执行时间',
+  `last_time` datetime NOT NULL COMMENT '最后执行时间',
   `tag` varchar(128) DEFAULT NULL COMMENT '标签',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='测试案例表';

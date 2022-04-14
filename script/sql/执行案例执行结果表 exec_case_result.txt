@@ -3,11 +3,11 @@
 CREATE TABLE `exec_case_result` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `exec_case_id` varchar(32) NOT NULL COMMENT '执行案例编号',
-  `exec_result` varchar(1024) NOT NULL COMMENT '执行结果',
+  `exec_result` varchar(1024) DEFAULT NULL COMMENT '执行结果',
   `exec_state` varchar(1) NOT NULL COMMENT '执行状态',
   `tran_info` varchar(4096) DEFAULT NULL COMMENT '关联交易',
-  `call_id` varchar(20) NOT NULL COMMENT '关联callid',
-  `start_time` date NOT NULL COMMENT '执行开始',
-  `end_time` date NOT NULL COMMENT '执行结束时间',
+  `call_id` varchar(20) DEFAULT NULL COMMENT '关联callid',
+  `start_time` datetime NOT NULL COMMENT '执行开始',
+  `end_time` datetime NOT NULL COMMENT '执行结束时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='执行案例执行结果表';

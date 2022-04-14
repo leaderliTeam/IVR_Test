@@ -12,7 +12,7 @@
     <result column="pre_case_id" property="frontCaseId" jdbcType="VARCHAR" />
     <result column="edit_state" property="editState" jdbcType="VARCHAR" />
     <result column="exec_times" property="execTimes" jdbcType="INTEGER" />
-    <result column="last_time" property="lastExecuteTime" jdbcType="DATE" />
+    <result column="last_time" property="lastExecuteTime" jdbcType="TIMESTAMP" />
     <result column="tag" property="tag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -22,7 +22,7 @@
   <update id="updateTestCaseById" parameterType="com.pccc.sip.ivrtest.pojo.TestCase" >
     update test_case
     set exec_times = exec_times + 1,
-      last_time = #{lastExecuteTime,jdbcType=DATE}
+      last_time = #{lastExecuteTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

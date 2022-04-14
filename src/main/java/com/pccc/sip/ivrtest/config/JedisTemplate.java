@@ -19,6 +19,14 @@ public class JedisTemplate {
         }
     }
 
+    public String setCacheWithExpireTime(String key, String value,long time) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            return jedis.set(key, value,"NX","PX",time);
+        } catch (Exception e) {
+            return "-1";
+        }
+    }
+
     public String get(String key) {
         try (Jedis jedis = jedisPool.getResource()) {
             return jedis.get(key);

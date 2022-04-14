@@ -1,18 +1,29 @@
 package com.pccc.sip.ivrtest.resolve;
 
 import com.pccc.sip.ivrtest.resolve.core.ResolveItem;
+import com.pccc.sip.ivrtest.resolve.resolver.Resolver;
+import com.pccc.sip.ivrtest.util.GsonUtil;
 
 import java.util.List;
 
 public class ExecuteResult {
 
-    private String execResult;
+    private List<ExecItem> execResult;
 
     public ExecuteResult(String execResult) {
-        this.execResult = execResult;
+        this.execResult = GsonUtil.GsonToList(execResult, ExecItem.class);
     }
 
-    public ResolveResult match(ResolveResult resolveResult, ResolveItem item) {
+    private ResolveResult match(ResolveResult resolveResult, ResolveItem item) {
+        List<Resolver> resolverList = item.getResolverList();
+
+        ExecItem currentItem = execResult.get(0);
+
+        for (ExecItem execItem : execResult) {
+            for (Resolver resolver : resolverList) {
+                resolver.resolve(execItem);
+            }
+        }
 
         return resolveResult;
     }
@@ -26,4 +37,5 @@ public class ExecuteResult {
         }
         return resolveResult;
     }
+
 }

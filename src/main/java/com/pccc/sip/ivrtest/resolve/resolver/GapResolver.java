@@ -1,5 +1,7 @@
 package com.pccc.sip.ivrtest.resolve.resolver;
 
+import com.pccc.sip.ivrtest.resolve.ExecItem;
+
 public class GapResolver implements Resolver {
 
     public GapResolver(String gap) {
@@ -7,7 +9,7 @@ public class GapResolver implements Resolver {
     }
 
     @Override
-    public boolean resolve(String str) {
+    public boolean resolve(ExecItem str) {
         return false;
     }
 }

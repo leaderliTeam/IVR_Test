@@ -37,10 +37,13 @@ public class ResolveAction {
         for (Rule rule : list) {
             String input = rule.getInput();
             String output = rule.getOutput();
+
+            ResolveItem resolveItem = new ResolveItem();
+            resolveItem.setRule("input:\"" + input + "\", " + "output:\"" + output + "\"");
+
             input = replaceKeys(input, params);
             output = replaceKeys(output, params);
 
-            ResolveItem resolveItem = new ResolveItem();
             resolveItem.setInput(input);
 
             String[] value = StringUtils.split(output, ";");

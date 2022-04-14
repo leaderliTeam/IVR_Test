@@ -15,4 +15,8 @@ public class ResolveResult {
     public void setSuccess(boolean success) {
         isSuccess = success;
     }
+
+    public void add(ExecItem item) {
+
+    }
 }

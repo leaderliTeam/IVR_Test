@@ -11,6 +11,8 @@ public class ResolveItem {
 
     List<Resolver> resolverList = new ArrayList<>();
 
+    private String rule;
+
     public String getInput() {
         return input;
     }
@@ -21,5 +23,17 @@ public class ResolveItem {
 
     public void add(Resolver resolver) {
         resolverList.add(resolver);
+    }
+
+    public List<Resolver> getResolverList() {
+        return resolverList;
+    }
+
+    public String getRule() {
+        return rule;
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
     }
 }

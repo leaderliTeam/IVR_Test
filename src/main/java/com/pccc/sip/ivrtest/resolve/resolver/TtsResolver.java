@@ -1,5 +1,7 @@
 package com.pccc.sip.ivrtest.resolve.resolver;
 
+import com.pccc.sip.ivrtest.resolve.ExecItem;
+
 public class TtsResolver implements Resolver {
 
     private String tts;
@@ -9,7 +11,7 @@ public class TtsResolver implements Resolver {
     }
 
     @Override
-    public boolean resolve(String str) {
+    public boolean resolve(ExecItem str) {
         return false;
     }
 }

@@ -1,5 +1,7 @@
 package com.pccc.sip.ivrtest.resolve.resolver;
 
+import com.pccc.sip.ivrtest.resolve.ExecItem;
+
 public class VoiceResolver implements Resolver {
 
     private String voiceNo;
@@ -9,7 +11,7 @@ public class VoiceResolver implements Resolver {
     }
 
     @Override
-    public boolean resolve(String str) {
+    public boolean resolve(ExecItem str) {
         return false;
     }
 

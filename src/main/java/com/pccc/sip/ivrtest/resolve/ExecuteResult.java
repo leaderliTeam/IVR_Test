@@ -15,6 +15,12 @@ public class ExecuteResult {
     }
 
     private ResolveResult match(ResolveResult resolveResult, ResolveItem item) {
+        String input = item.getInput();
+
+        for (ExecItem execItem : execResult) {
+
+        }
+
         List<Resolver> resolverList = item.getResolverList();
 
         ExecItem currentItem = execResult.get(0);

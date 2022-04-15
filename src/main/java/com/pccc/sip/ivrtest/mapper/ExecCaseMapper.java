@@ -7,5 +7,6 @@ public interface ExecCaseMapper extends BaseMapper<ExecCase> {
 
     ExecCase queryById(String id);
     int updateExecCaseById(ExecCase execCase);
+    String queryByLikeId(String id);
 
 }

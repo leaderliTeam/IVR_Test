@@ -24,6 +24,15 @@
         from exec_case
         where id = #{id,jdbcType=VARCHAR}
     </select>
+    <select id="queryByLikeId" resultType="java.lang.String" parameterType="java.lang.String">
+        <bind name="pattern" value="id + '%'"/>
+        select
+        <include refid="Base_Column_List"/>
+        from exec_case
+        where id like #{pattern}
+        order by id desc
+        limit 1
+    </select>
     <update id="updateExecCaseById" parameterType="com.pccc.sip.ivrtest.pojo.ExecCase" >
         update exec_case
         set exec_times = exec_times + 1,

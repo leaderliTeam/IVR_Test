@@ -19,6 +19,15 @@
     id, case_desc, input_seq, is_used, demand_id, principal_test, principal_develop, 
     pre_case_id, edit_state, exec_times, last_time, tag
   </sql>
+  <select id="queryByLikeId" resultType="java.lang.String" parameterType="java.lang.String">
+    <bind name="pattern" value="id + '%'"/>
+    select
+    <include refid="Base_Column_List"/>
+    from test_case
+    where id like #{pattern}
+    order by id desc
+    limit 1
+  </select>
   <update id="updateTestCaseById" parameterType="com.pccc.sip.ivrtest.pojo.TestCase" >
     update test_case
     set exec_times = exec_times + 1,

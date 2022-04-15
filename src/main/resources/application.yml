@@ -19,3 +19,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:/mappers/**.xml
+
+case:
+  serial:
+    length: 4

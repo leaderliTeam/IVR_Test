@@ -6,12 +6,12 @@ import io.leaderli.litil.meta.Lino;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
-public class EngineProcessor {
+public class EngineProcessor implements ApplicationListener<ApplicationReadyEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(EngineProcessor.class);
     @Autowired
@@ -19,8 +19,8 @@ public class EngineProcessor {
     @Autowired
     private ExecuteEngine executeEngine;
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         new Thread(() -> {
             while (true) {
                 if (engineRedisQueue.exists() && engineRedisQueue.size() > 0 ) {
@@ -38,5 +38,4 @@ public class EngineProcessor {
             }
         }).start();
     }
-
 }

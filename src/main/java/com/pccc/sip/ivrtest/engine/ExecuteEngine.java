@@ -1,26 +1,18 @@
 package com.pccc.sip.ivrtest.engine;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.pccc.sip.ivrtest.entity.ExecuteCaseRequest;
-import com.pccc.sip.ivrtest.mapper.ExecCaseMapper;
-import com.pccc.sip.ivrtest.mapper.ExecCaseResultMapper;
-import com.pccc.sip.ivrtest.mapper.TestCaseMapper;
 import com.pccc.sip.ivrtest.pojo.ExecCase;
 import com.pccc.sip.ivrtest.pojo.ExecCaseResult;
 import com.pccc.sip.ivrtest.pojo.TestCase;
 import com.pccc.sip.ivrtest.service.ExecuteEngineService;
 import com.pccc.sip.ivrtest.util.GsonUtil;
-import io.leaderli.litil.meta.Lino;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,7 +39,8 @@ public class ExecuteEngine {
         try {
             execute(executeInfo,executeCaseRequest,request,false);
             execCaseResult.setCallId("");
-            execCaseResult.setExecInfo(GsonUtil.GsonString(executeInfo));
+            //TODO
+            execCaseResult.setExecInfo(GsonUtil.readerArrayJson("json/execInfo.json"));
             //TODO 执行详情规则解析
             HashMap<String,String> execResult = new HashMap<>();
 

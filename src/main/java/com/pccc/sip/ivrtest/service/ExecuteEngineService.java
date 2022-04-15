@@ -16,4 +16,6 @@ public interface ExecuteEngineService {
 
     public void addExecCaseResult(ExecCaseResult execCaseResult);
 
+    public String queryExecInfoById(String id);
+
 }

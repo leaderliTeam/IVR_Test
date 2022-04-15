@@ -1,0 +1,34 @@
+[
+  {
+    "type": "input",
+    "value": "622225874443221"
+  },
+  {
+    "type": "wav",
+    "value": "10410#请输入查询密码，按#号键确认"
+  },
+  {
+    "type": "wav",
+    "value": "10651#如您忘记查询密码请按1#号键"
+  },
+  {
+    "type": "input",
+    "value": "1"
+  },
+  {
+    "type": "vdn",
+    "value": "56301"
+  },
+  {
+    "type": "input",
+    "value": "N10001"
+  },
+  {
+    "type": "seq",
+    "value": "1-2-3"
+  },
+  {
+    "type": "wav",
+    "value": "11111#你好"
+  }
+]

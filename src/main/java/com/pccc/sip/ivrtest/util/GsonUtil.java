@@ -2,7 +2,9 @@ package com.pccc.sip.ivrtest.util;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.*;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,4 +63,12 @@ public class GsonUtil {
         return list;
     }
 
+    public static String readerArrayJson(String fileName){
+        try (JsonReader jsonReader = gson.newJsonReader(new InputStreamReader(GsonUtil.class.getClassLoader().getResourceAsStream(fileName)))){
+            return gson.toJson(gson.fromJson(jsonReader,JsonArray.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

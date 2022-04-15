@@ -60,5 +60,10 @@ public class ExecuteEngineServiceImpl implements ExecuteEngineService {
         }
     }
 
+    @Override
+    public String queryExecInfoById(String id) {
+        return jedisTemplate.get(id);
+    }
+
 
 }

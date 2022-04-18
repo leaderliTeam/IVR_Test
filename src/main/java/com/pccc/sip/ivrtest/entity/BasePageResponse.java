@@ -1,5 +1,6 @@
 package com.pccc.sip.ivrtest.entity;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pccc.sip.ivrtest.constant.Type;
 
 public class BasePageResponse {
@@ -62,5 +63,12 @@ public class BasePageResponse {
     public void setReturnMsg(Type type){
         this.code = Integer.parseInt(type.getType());
         this.msg = type.getTypeName();
+    }
+
+    public void setPageInfo(Page page){
+        this.pageSize = (int) page.getSize();
+        this.currentPage = (int) page.getCurrent();
+        this.totalPage = (int) page.getTotal();
+        this.totalCount= (int) page.getPages();
     }
 }

@@ -61,10 +61,7 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
         execCaseMapper.selectPage(page,execCaseQueryWrapper);
 
         QueryExecCasePageResponse queryExecCasePageResponse = new QueryExecCasePageResponse();
-        queryExecCasePageResponse.setCurrentPage((int) page.getCurrent());
-        queryExecCasePageResponse.setPageSize((int) page.getSize());
-        queryExecCasePageResponse.setTotalCount((int) page.getTotal());
-        queryExecCasePageResponse.setTotalPage((int) page.getPages());
+        queryExecCasePageResponse.setPageInfo(page);
         queryExecCasePageResponse.setList(execCasesToExecuteCaseEntitys(page.getRecords()));
         return queryExecCasePageResponse;
     }

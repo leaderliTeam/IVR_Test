@@ -5,4 +5,5 @@ public interface CommonService {
     public String creatExecCaseId();
     public String creatTestCaseId();
     public String getTodayCaseIdOfNew(String type);
+
 }

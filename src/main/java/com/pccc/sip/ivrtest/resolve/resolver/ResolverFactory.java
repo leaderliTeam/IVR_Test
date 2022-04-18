@@ -10,8 +10,8 @@ public class ResolverFactory {
 
     public Resolver createResolver(String rule) {
         if (StringUtils.startsWith(rule, voice)) {
-            String vocieNo = StringUtils.replace(rule, voice, "");
-            return new VoiceResolver(vocieNo);
+            String voiceNo = StringUtils.replace(rule, voice, "");
+            return new VoiceResolver(voiceNo);
         }
         if (StringUtils.startsWith(rule, tts)) {
             String ttsStr = StringUtils.replace(rule, tts, "");

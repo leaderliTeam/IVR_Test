@@ -1,10 +1,13 @@
 package com.pccc.sip.ivrtest.resolve;
 
 public class ExecItem {
-    String type;
-    String value;
-    String rule;
-    boolean match;
+    public static final String type_input = "input";
+
+
+    private String type;
+    private String value;
+    private String rule;
+    private boolean match;
 
     public String getType() {
         return type;

@@ -10,6 +10,6 @@ cal(){
 
 
 cal dengqiankun
-cal ZhangHaoSy
+cal zhang
 cal wleecc
 cal simolegiue

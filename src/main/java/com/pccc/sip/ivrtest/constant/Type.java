@@ -6,6 +6,7 @@ public enum Type {
     TESTCASE("T","测试案例"),
     ENABLE("1","启用/归档"),
     DISABLE("0","停用/未归档"),
+    ALL("2","全部"),
     SUCCESS("0","success"),
     FAIL("-1","fail");
 

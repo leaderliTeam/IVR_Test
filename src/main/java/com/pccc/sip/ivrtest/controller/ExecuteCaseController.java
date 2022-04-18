@@ -2,12 +2,9 @@ package com.pccc.sip.ivrtest.controller;
 
 import com.pccc.sip.ivrtest.constant.Type;
 import com.pccc.sip.ivrtest.engine.EngineRedisQueue;
-import com.pccc.sip.ivrtest.entity.BaseResponse;
-import com.pccc.sip.ivrtest.entity.ExecuteCaseRequest;
-import com.pccc.sip.ivrtest.entity.ExecuteCaseResponse;
-import com.pccc.sip.ivrtest.entity.FillDataRequest;
+import com.pccc.sip.ivrtest.entity.*;
 import com.pccc.sip.ivrtest.service.CommonService;
-import com.pccc.sip.ivrtest.service.ExecuteEngineService;
+import com.pccc.sip.ivrtest.service.ExecuteCaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +18,13 @@ public class ExecuteCaseController {
     @Autowired
     private EngineRedisQueue engineRedisQueue;
     @Autowired
-    private ExecuteEngineService executeEngineService;
+    private ExecuteCaseService executeCaseService;
     @Autowired
     private CommonService commonService;
 
     @PostMapping("/execute")
-    public ExecuteCaseResponse executeCases(@RequestBody List<ExecuteCaseRequest> executeCaseRequests){
-        int size = engineRedisQueue.put(executeCaseRequests);
+    public ExecuteCaseResponse executeCases(@RequestBody List<ExecuteCaseEntity> executeCaseEntities){
+        int size = engineRedisQueue.put(executeCaseEntities);
         ExecuteCaseResponse executeCaseResponse = new ExecuteCaseResponse();
         executeCaseResponse.setSize(size);
         return executeCaseResponse;
@@ -35,7 +32,7 @@ public class ExecuteCaseController {
 
     @PostMapping("/addData")
     public BaseResponse addData(@RequestBody FillDataRequest fillDataRequest){
-        boolean flag = executeEngineService.addBatchExecCase(fillDataRequest);
+        boolean flag = executeCaseService.addBatchExecCase(fillDataRequest);
         BaseResponse baseResponse = new BaseResponse();
         if (!flag){
             baseResponse.setReturnMsg(Type.FAIL);
@@ -54,6 +51,21 @@ public class ExecuteCaseController {
             executeCaseResponse.setId(id);
         }
         return executeCaseResponse;
+    }
+
+    @PostMapping("/add")
+    public BaseResponse addExecuteCase(@RequestBody ExecuteCaseEntity executeCaseEntity){
+        int res = executeCaseService.addExecCase(executeCaseEntity);
+        BaseResponse baseResponse = new BaseResponse();
+        if (res == 0){
+            baseResponse.setReturnMsg(Type.FAIL);
+        }
+        return baseResponse;
+    }
+
+    @PostMapping("/query")
+    public QueryExecCasePageResponse queryExecuteCaseByPage(@RequestBody QueryExecCasePageRequest request){
+        return executeCaseService.queryByPage(request);
     }
 
 }

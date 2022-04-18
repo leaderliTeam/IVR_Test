@@ -1,7 +1,7 @@
 package com.pccc.sip.ivrtest.engine;
 
 import com.google.gson.JsonObject;
-import com.pccc.sip.ivrtest.entity.ExecuteCaseRequest;
+import com.pccc.sip.ivrtest.entity.ExecuteCaseEntity;
 import com.pccc.sip.ivrtest.pojo.ExecCase;
 import com.pccc.sip.ivrtest.pojo.ExecCaseResult;
 import com.pccc.sip.ivrtest.pojo.TestCase;
@@ -26,18 +26,18 @@ public class ExecuteEngine {
     @Autowired
     private ExecuteEngineService executeEngineService;
 
-    public void executeCases(ExecuteCaseRequest executeCaseRequest) {
-        logger.info(executeCaseRequest.getId());
-        if (!StringUtils.equals("1",executeCaseRequest.getUsed())){
+    public void executeCases(ExecuteCaseEntity executeCaseEntity) {
+        logger.info(executeCaseEntity.getId());
+        if (!StringUtils.equals("1", executeCaseEntity.getUsed())){
             return;
         }
         List<JsonObject> executeInfo = new ArrayList<>();
         JsonObject request = new JsonObject();
         Date startDate = new Date();
         ExecCaseResult execCaseResult = new ExecCaseResult();
-        execCaseResult.setExecCaseId(executeCaseRequest.getId());
+        execCaseResult.setExecCaseId(executeCaseEntity.getId());
         try {
-            execute(executeInfo,executeCaseRequest,request,false);
+            execute(executeInfo, executeCaseEntity,request,false);
             execCaseResult.setCallId("");
             //TODO
             execCaseResult.setExecInfo(GsonUtil.readerArrayJson("json/execInfo.json"));
@@ -61,26 +61,26 @@ public class ExecuteEngine {
     /**
      *执行案例，交互客户端，更新数据库
      * @param executeInfo 执行详情集
-     * @param executeCaseRequest 执行案例数据
+     * @param executeCaseEntity 执行案例数据
      * @param request 与客户端交互的最新的报文
      * @param preposition 是否前置标识
      */
-    private void execute(List<JsonObject> executeInfo, ExecuteCaseRequest executeCaseRequest,JsonObject request,boolean preposition){
+    private void execute(List<JsonObject> executeInfo, ExecuteCaseEntity executeCaseEntity, JsonObject request, boolean preposition){
 
         //执行前置
         ExecCase execCase = new ExecCase();
-        if (StringUtils.isNotBlank(executeCaseRequest.getExecuteId())){
-            execCase = executeEngineService.queryExecCaseById(executeCaseRequest.getExecuteId());
+        if (StringUtils.isNotBlank(executeCaseEntity.getExecuteId())){
+            execCase = executeEngineService.queryExecCaseById(executeCaseEntity.getExecuteId());
             execute(executeInfo,execCaseToRequest(execCase),request,true);
         }
 
-        TestCase testCase = executeEngineService.queryTestCaseById(executeCaseRequest.getCaseId());
-        executeInfo.addAll(clientInteraction(fillData(executeCaseRequest.getVariableData(),testCase.getInputSeq()),preposition,request));
+        TestCase testCase = executeEngineService.queryTestCaseById(executeCaseEntity.getCaseId());
+        executeInfo.addAll(clientInteraction(fillData(executeCaseEntity.getVariableData(),testCase.getInputSeq()),preposition,request));
 
         //更新数据库
         Date date = new Date();
         testCase.setLastExecuteTime(date);
-        execCase.setId(executeCaseRequest.getId());
+        execCase.setId(executeCaseEntity.getId());
         execCase.setLastTime(date);
         executeEngineService.modifyCaseById(testCase,execCase);
     }
@@ -129,14 +129,14 @@ public class ExecuteEngine {
         return strings;
     }
 
-    private ExecuteCaseRequest execCaseToRequest(ExecCase execCase){
-        ExecuteCaseRequest executeCaseRequest = new ExecuteCaseRequest();
-        executeCaseRequest.setId(execCase.getId());
-        executeCaseRequest.setCaseId(execCase.getTestCaseId());
-        executeCaseRequest.setExecuteId(execCase.getPreExecCaseId());
-        executeCaseRequest.setUsed(execCase.getIsUsed());
-        executeCaseRequest.setVariableData(GsonUtil.GsonToBean(execCase.getParams(),HashMap.class));
-        return executeCaseRequest;
+    private ExecuteCaseEntity execCaseToRequest(ExecCase execCase){
+        ExecuteCaseEntity executeCaseEntity = new ExecuteCaseEntity();
+        executeCaseEntity.setId(execCase.getId());
+        executeCaseEntity.setCaseId(execCase.getTestCaseId());
+        executeCaseEntity.setExecuteId(execCase.getPreExecCaseId());
+        executeCaseEntity.setUsed(execCase.getIsUsed());
+        executeCaseEntity.setVariableData(GsonUtil.GsonToBean(execCase.getParams(),HashMap.class));
+        return executeCaseEntity;
     }
 
 }

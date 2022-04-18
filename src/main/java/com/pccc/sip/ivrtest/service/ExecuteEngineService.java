@@ -21,6 +21,4 @@ public interface ExecuteEngineService {
 
     public String queryExecInfoById(String id);
 
-    public boolean addBatchExecCase(FillDataRequest fillDataRequest);
-
 }

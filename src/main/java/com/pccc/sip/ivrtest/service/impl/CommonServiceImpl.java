@@ -27,6 +27,7 @@ public class CommonServiceImpl implements CommonService {
     private int length;
 
     private final static String IVR = "IVR";
+    private final static SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
     private static HashMap<String,String> map = new HashMap<>();
 
@@ -87,11 +88,11 @@ public class CommonServiceImpl implements CommonService {
     }
 
     private String getIdPrefix(String type){
-        return IVR + type + new SimpleDateFormat("yyyyMMdd").format(new Date());
+        return IVR + type + format.format(new Date());
     }
 
     private String getFirstCaseId(String type){
-        return IVR + type + (Long.parseLong(new SimpleDateFormat("yyyyMMdd").format(new Date())) * getSerialNo() + 1);
+        return IVR + type + (Long.parseLong(format.format(new Date())) * getSerialNo() + 1);
     }
 
     private String getNewCaseId(String id){

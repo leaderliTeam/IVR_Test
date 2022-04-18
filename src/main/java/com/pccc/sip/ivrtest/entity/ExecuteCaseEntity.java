@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 
-public class ExecuteCaseRequest extends BaseRequest{
+public class ExecuteCaseEntity{
 
     private String id;
     private String caseDesc;
@@ -14,6 +14,8 @@ public class ExecuteCaseRequest extends BaseRequest{
     private String caseId;
     private String executeId;
     private String archiveStatus;
+    private String executeCount;
+    private String lastExecuteTime;
 
     public String getId() {
         return id;
@@ -79,4 +81,19 @@ public class ExecuteCaseRequest extends BaseRequest{
         this.archiveStatus = archiveStatus;
     }
 
+    public String getExecuteCount() {
+        return executeCount;
+    }
+
+    public void setExecuteCount(String executeCount) {
+        this.executeCount = executeCount;
+    }
+
+    public String getLastExecuteTime() {
+        return lastExecuteTime;
+    }
+
+    public void setLastExecuteTime(String lastExecuteTime) {
+        this.lastExecuteTime = lastExecuteTime;
+    }
 }

@@ -2,18 +2,9 @@ package com.pccc.sip.ivrtest.entity;
 
 import java.util.List;
 
-public class FillDataRequest {
+public class QueryExecCasePageResponse extends BasePageResponse{
 
-    private String executeBatchNo;
     private List<ExecuteCaseEntity> list;
-
-    public String getExecuteBatchNo() {
-        return executeBatchNo;
-    }
-
-    public void setExecuteBatchNo(String executeBatchNo) {
-        this.executeBatchNo = executeBatchNo;
-    }
 
     public List<ExecuteCaseEntity> getList() {
         return list;

@@ -18,6 +18,19 @@
         , batch, case_desc, params, is_used, test_case_id, pre_exec_case_id, is_archived,
     exec_times, last_time
     </sql>
+    <insert id="insertBatch" parameterType="java.util.List" >
+        insert into exec_case (id, batch, case_desc,
+                               params, is_used, test_case_id,
+                               pre_exec_case_id, is_archived, exec_times,
+                               last_time)
+        values
+               <foreach collection="list" item="case" separator=",">
+                   (#{case.id,jdbcType=VARCHAR}, #{case.batch,jdbcType=INTEGER}, #{case.caseDesc,jdbcType=VARCHAR},
+                   #{case.params,jdbcType=VARCHAR}, #{case.isUsed,jdbcType=VARCHAR}, #{case.testCaseId,jdbcType=VARCHAR},
+                   #{case.preExecCaseId,jdbcType=VARCHAR}, #{case.isArchived,jdbcType=VARCHAR}, #{case.execTimes,jdbcType=INTEGER},
+                   #{case.lastTime,jdbcType=TIMESTAMP})
+               </foreach>
+    </insert>
     <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>

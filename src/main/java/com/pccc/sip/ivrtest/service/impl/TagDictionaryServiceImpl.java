@@ -24,12 +24,12 @@ public class TagDictionaryServiceImpl extends ServiceImpl<TagDictionaryMapper, T
     }
 
     @Override
-    public int deleteTagDictionaryById(String id) {
+    public int deleteTagDictionaryById(int id) {
         return tagDictionaryMapper.deleteById(id);
     }
 
     @Override
-    public TagDictionary findTagDictionaryById(String id) {
+    public TagDictionary findTagDictionaryById(int id) {
         return tagDictionaryMapper.selectById(id);
     }
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pccc.sip.ivrtest.mapper.TestCaseMapper;
 import com.pccc.sip.ivrtest.pojo.TestCase;
+import com.pccc.sip.ivrtest.service.CommonService;
 import com.pccc.sip.ivrtest.service.TestCaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,14 @@ import org.springframework.stereotype.Service;
 public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> implements TestCaseService {
     @Autowired
     private TestCaseMapper testCaseMapper;
+    @Autowired
+    private CommonService commonService;
 
     //增
     @Override
     public int addTestCase(TestCase testCase) {
+        String id = commonService.creatTestCaseId();
+        testCase.setId(id);
         return testCaseMapper.insert(testCase);
     }
 

@@ -8,7 +8,7 @@ public interface TagDictionaryService extends IService<TagDictionary> {
 
     int updateTagDictionary(TagDictionary tagDictionary);
 
-    int deleteTagDictionaryById(String id);
+    int deleteTagDictionaryById(int id);
 
-    TagDictionary findTagDictionaryById(String id);
+    TagDictionary findTagDictionaryById(int id);
 }

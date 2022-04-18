@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -31,46 +33,57 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public synchronized String creatExecCaseId() {
         String id = execCaseMapper.queryByLikeId(getIdPrefix(Type.EXECCASE.getType()));
-        String execCaseId = map.get(Type.EXECCASE.getType());
+        String execCaseId = map.get(getIdPrefix(Type.EXECCASE.getType()));
         if (StringUtils.isBlank(id)
                 && StringUtils.isBlank(execCaseId)){
             id = getFirstCaseId(Type.EXECCASE.getType());
+            clearCaseIdMap(Type.EXECCASE.getType());
         } else if(StringUtils.isNotBlank(execCaseId)
             && (StringUtils.isBlank(id) || compareId(execCaseId,id))){
                 id = getNewCaseId(execCaseId);
         } else {
             id = getNewCaseId(id);
         }
-        map.put(Type.EXECCASE.getType(),id);
+        map.put(getIdPrefix(Type.EXECCASE.getType()),id);
         return id;
     }
 
     @Override
     public synchronized String creatTestCaseId() {
         String id = testCaseMapper.queryByLikeId(getIdPrefix(Type.TESTCASE.getType()));
-        String testCaseId =  map.get(Type.TESTCASE.getType());
+        String testCaseId =  map.get(getIdPrefix(Type.TESTCASE.getType()));
         if (StringUtils.isBlank(id)
                 && StringUtils.isBlank(testCaseId)){
             id = getFirstCaseId(Type.TESTCASE.getType());
+            clearCaseIdMap(Type.TESTCASE.getType());
         } else if(StringUtils.isNotBlank(testCaseId)
                 && (StringUtils.isBlank(id)) || compareId(testCaseId,id)){
             id = getNewCaseId(testCaseId);
         } else {
             id = getNewCaseId(id);
         }
-        map.put(Type.TESTCASE.getType(),id);
+        map.put(getIdPrefix(Type.TESTCASE.getType()),id);
         return id;
     }
 
     @Override
     public String getTodayCaseIdOfNew(String type) {
-        String id = testCaseMapper.queryByLikeId(getIdPrefix(type));
-        String caseId = map.get(type);
+        String id = null;
+        if (StringUtils.equals(Type.TESTCASE.getType(),type)){
+            id = testCaseMapper.queryByLikeId(getIdPrefix(type));
+        }else{
+            id = execCaseMapper.queryByLikeId(getIdPrefix(type));
+        }
+        String caseId = map.get(getIdPrefix(type));
         if (StringUtils.isNotBlank(caseId)
                 && (StringUtils.isBlank(id) || compareId(caseId,id))){
             id = caseId;
         }
         return id;
+    }
+
+    public void clearCaseIdMap(String type) {
+        map.entrySet().removeIf(map -> map.getKey().contains(IVR + type));
     }
 
     private String getIdPrefix(String type){

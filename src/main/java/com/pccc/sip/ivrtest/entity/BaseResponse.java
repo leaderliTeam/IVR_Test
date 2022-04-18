@@ -1,5 +1,7 @@
 package com.pccc.sip.ivrtest.entity;
 
+import com.pccc.sip.ivrtest.constant.Type;
+
 public class BaseResponse {
 
     public int code = 0;
@@ -19,5 +21,10 @@ public class BaseResponse {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public void setReturnMsg(Type type){
+        this.code = Integer.parseInt(type.getType());
+        this.msg = type.getTypeName();
     }
 }

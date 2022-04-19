@@ -1,10 +1,13 @@
 package com.pccc.sip.ivrtest.engine;
 
 import com.google.gson.JsonObject;
+import com.pccc.sip.ivrtest.constant.Type;
 import com.pccc.sip.ivrtest.entity.ExecuteCaseEntity;
 import com.pccc.sip.ivrtest.pojo.ExecCase;
 import com.pccc.sip.ivrtest.pojo.ExecCaseResult;
 import com.pccc.sip.ivrtest.pojo.TestCase;
+import com.pccc.sip.ivrtest.resolve.ResolveResult;
+import com.pccc.sip.ivrtest.resolve.core.ExecutionResultResolver;
 import com.pccc.sip.ivrtest.service.ExecuteEngineService;
 import com.pccc.sip.ivrtest.util.GsonUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -26,9 +29,12 @@ public class ExecuteEngine {
     @Autowired
     private ExecuteEngineService executeEngineService;
 
+    @Autowired
+    private ExecutionResultResolver executionResultResolver;
+
     public void executeCases(ExecuteCaseEntity executeCaseEntity) {
         logger.info(executeCaseEntity.getId());
-        if (!StringUtils.equals("1", executeCaseEntity.getUsed())){
+        if (!StringUtils.equals(Type.ENABLE.getType(), executeCaseEntity.getUsed())){
             return;
         }
         List<JsonObject> executeInfo = new ArrayList<>();
@@ -37,16 +43,16 @@ public class ExecuteEngine {
         ExecCaseResult execCaseResult = new ExecCaseResult();
         execCaseResult.setExecCaseId(executeCaseEntity.getId());
         try {
-            execute(executeInfo, executeCaseEntity,request,false);
+            TestCase testCase = execute(executeInfo, executeCaseEntity,request,false);
             execCaseResult.setCallId("");
             //TODO
             execCaseResult.setExecInfo(GsonUtil.readerArrayJson("json/execInfo.json"));
             //TODO 执行详情规则解析
-            HashMap<String,String> execResult = new HashMap<>();
-
+            ResolveResult resolveResult = executionResultResolver.resolve(GsonUtil.GsonString(executeInfo),
+                    testCase.getExpResultRule(),executeCaseEntity.getVariableData());
             //TODO 更新执行结果表
             execCaseResult.setExecState("S");
-            execCaseResult.setExecResult(GsonUtil.GsonString(execResult));
+            execCaseResult.setExecResult(GsonUtil.GsonString(resolveResult));
         } catch (Exception e) {
             logger.error(" ExecuteEngine executeCases execute error ",e);
             execCaseResult.setExecState("F");
@@ -65,7 +71,7 @@ public class ExecuteEngine {
      * @param request 与客户端交互的最新的报文
      * @param preposition 是否前置标识
      */
-    private void execute(List<JsonObject> executeInfo, ExecuteCaseEntity executeCaseEntity, JsonObject request, boolean preposition){
+    private TestCase execute(List<JsonObject> executeInfo, ExecuteCaseEntity executeCaseEntity, JsonObject request, boolean preposition){
 
         //执行前置
         ExecCase execCase = new ExecCase();
@@ -83,6 +89,7 @@ public class ExecuteEngine {
         execCase.setId(executeCaseEntity.getId());
         execCase.setLastTime(date);
         executeEngineService.modifyCaseById(testCase,execCase);
+        return testCase;
     }
 
     /**

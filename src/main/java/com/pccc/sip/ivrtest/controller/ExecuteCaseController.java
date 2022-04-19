@@ -68,4 +68,23 @@ public class ExecuteCaseController {
         return executeCaseService.queryByPage(request);
     }
 
+    @PostMapping("/update")
+    public BaseResponse updateExecuteCase(@RequestBody ExecuteCaseEntity executeCaseEntity){
+        int res = executeCaseService.updateById(executeCaseEntity);
+        BaseResponse baseResponse = new BaseResponse();
+        if (res == 0){
+            baseResponse.setReturnMsg(Type.FAIL);
+        }
+        return baseResponse;
+    }
+
+    @PostMapping("/delete")
+    public BaseResponse deleteExecuteCase(@RequestBody DeleteExecCaseRequest deleteExecCaseRequest){
+        int res = executeCaseService.deleteBatchIds(deleteExecCaseRequest.getId());
+        BaseResponse baseResponse = new BaseResponse();
+        if (res == 0){
+            baseResponse.setReturnMsg(Type.FAIL);
+        }
+        return baseResponse;
+    }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  scan="true" debug="false">
-
+    <property name="LogName" value="ivr_test" />
+    <property name="Path" value="/app/log" />
     <!--输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -8,8 +9,23 @@
         </encoder>
     </appender>
 
+    <!--输出到文件-->
+    <appender name="trace" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${Path}/${LogName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${Path}/${LogName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <root level="info">
         <appender-ref ref="console" />
+        <appender-ref ref="trace" />
     </root>
+
+    <logger name="com.pccc.sip.ivrtest.mapper" level="debug"/>
 
 </configuration>

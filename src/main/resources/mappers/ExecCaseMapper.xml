@@ -40,7 +40,7 @@
     <select id="queryByLikeId" resultType="java.lang.String" parameterType="java.lang.String">
         <bind name="pattern" value="id + '%'"/>
         select
-        <include refid="Base_Column_List"/>
+        id
         from exec_case
         where id like #{pattern}
         order by id desc

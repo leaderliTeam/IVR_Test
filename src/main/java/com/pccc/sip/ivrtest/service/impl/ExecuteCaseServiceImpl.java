@@ -66,6 +66,25 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
         return queryExecCasePageResponse;
     }
 
+    @Override
+    public int updateById(ExecuteCaseEntity executeCaseEntity) {
+        ExecCase execCase = new ExecCase();
+        execCase.setId(executeCaseEntity.getId());
+        execCase.setCaseDesc(executeCaseEntity.getCaseDesc());
+        execCase.setBatch(Integer.valueOf(executeCaseEntity.getExecuteBatchNo()));
+        execCase.setParams(GsonUtil.GsonString(executeCaseEntity.getVariableData()));
+        execCase.setIsUsed(executeCaseEntity.getUsed());
+        execCase.setTestCaseId(executeCaseEntity.getCaseId());
+        execCase.setPreExecCaseId(executeCaseEntity.getExecuteId());
+        execCase.setIsArchived(executeCaseEntity.getArchiveStatus());
+        return execCaseMapper.updateById(execCase);
+    }
+
+    @Override
+    public int deleteBatchIds(List<String> idList) {
+        return execCaseMapper.deleteBatchIds(idList);
+    }
+
     private void queryWrapperEq(QueryWrapper execCaseQueryWrapper,String key,String value){
         if (StringUtils.isNotBlank(value)){
             execCaseQueryWrapper.eq(key,value);

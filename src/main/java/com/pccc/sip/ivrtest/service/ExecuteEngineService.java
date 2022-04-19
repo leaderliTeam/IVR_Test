@@ -9,16 +9,16 @@ import java.util.List;
 
 public interface ExecuteEngineService {
 
-    public ExecCase queryExecCaseById(String id);
-    public int modifyExecCaseById(ExecCase execCase);
+    ExecCase queryExecCaseById(String id);
+    int modifyExecCaseById(ExecCase execCase);
 
-    public TestCase queryTestCaseById(String id);
-    public int modifyTestCaseById(TestCase testCase);
+    TestCase queryTestCaseById(String id);
+    int modifyTestCaseById(TestCase testCase);
 
-    public void modifyCaseById(TestCase testCase,ExecCase execCase);
+    void modifyCaseById(TestCase testCase, ExecCase execCase);
 
-    public void addExecCaseResult(ExecCaseResult execCaseResult);
+    void addExecCaseResult(ExecCaseResult execCaseResult);
 
-    public String queryExecInfoById(String id);
+    String queryExecInfoById(String id);
 
 }

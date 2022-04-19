@@ -10,6 +10,8 @@ import com.pccc.sip.ivrtest.service.TestCaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> implements TestCaseService {
     @Autowired
@@ -33,8 +35,8 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
 
     //删
     @Override
-    public int deleteTestCaseById(String id) {
-        return testCaseMapper.deleteById(id);
+    public int deleteTestCaseById(List<String> idList) {
+        return testCaseMapper.deleteBatchIds(idList);
     }
 
     //查

@@ -1,6 +1,8 @@
 package com.pccc.sip.ivrtest.controller;
 
+import com.pccc.sip.ivrtest.constant.Type;
 import com.pccc.sip.ivrtest.entity.BaseResponse;
+import com.pccc.sip.ivrtest.pojo.DeleteTestCaseRequest;
 import com.pccc.sip.ivrtest.pojo.TestCase;
 import com.pccc.sip.ivrtest.service.CommonService;
 import com.pccc.sip.ivrtest.service.TestCaseService;
@@ -20,11 +22,10 @@ public class TestCaseController {
     //增
     @PostMapping(value = "/add")
     public Object add(@RequestBody TestCase testCase) {
-        if (StringUtils.equals(String.valueOf(testCaseService.addTestCase(testCase)), "1")) {
+        if (testCaseService.addTestCase(testCase) == 1) {
             return response;
         } else {
-            response.setCode(-1);
-            response.setMsg("fail");
+            response.setReturnMsg(Type.FAIL);
             return response;
         }
     }
@@ -32,23 +33,21 @@ public class TestCaseController {
     //改
     @PostMapping(value = "/update")
     public Object update(@RequestBody TestCase testCase) {
-        if (StringUtils.equals(String.valueOf(testCaseService.updateTestCase(testCase)), "1")) {
+        if (testCaseService.updateTestCase(testCase) == 1) {
             return response;
         } else {
-            response.setCode(-1);
-            response.setMsg("fail");
+            response.setReturnMsg(Type.FAIL);
             return response;
         }
     }
 
     //删
     @PostMapping(value = "/delete")
-    public Object delete(@RequestBody TestCase testCase) {
-        if (StringUtils.equals(String.valueOf(testCaseService.deleteTestCaseById(testCase.getId())), "1")) {
+    public Object delete(@RequestBody DeleteTestCaseRequest deleteTestCaseRequest) {
+        if (testCaseService.deleteTestCaseById(deleteTestCaseRequest.getId()) == 0) {
+            response.setReturnMsg(Type.FAIL);
             return response;
         } else {
-            response.setCode(-1);
-            response.setMsg("fail");
             return response;
         }
     }

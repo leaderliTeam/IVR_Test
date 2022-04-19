@@ -58,7 +58,7 @@ public class CommonServiceImpl implements CommonService {
             id = getFirstCaseId(Type.TESTCASE.getType());
             clearCaseIdMap(Type.TESTCASE.getType());
         } else if(StringUtils.isNotBlank(testCaseId)
-                && (StringUtils.isBlank(id)) || compareId(testCaseId,id)){
+                && (StringUtils.isBlank(id) || compareId(testCaseId,id))){
             id = getNewCaseId(testCaseId);
         } else {
             id = getNewCaseId(id);

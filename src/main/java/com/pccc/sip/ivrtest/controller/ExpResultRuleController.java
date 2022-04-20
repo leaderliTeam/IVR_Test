@@ -1,6 +1,6 @@
 package com.pccc.sip.ivrtest.controller;
 
-import com.pccc.sip.ivrtest.entity.BaseResponse;
+import com.pccc.sip.ivrtest.entity.response.BaseResponse;
 import com.pccc.sip.ivrtest.pojo.ExpResultRule;
 import com.pccc.sip.ivrtest.service.ExpResultRuleService;
 import org.apache.commons.lang3.StringUtils;

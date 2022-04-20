@@ -1,9 +1,9 @@
 package com.pccc.sip.ivrtest.service;
 
 import com.pccc.sip.ivrtest.entity.ExecuteCaseEntity;
-import com.pccc.sip.ivrtest.entity.FillDataRequest;
-import com.pccc.sip.ivrtest.entity.QueryExecCasePageRequest;
-import com.pccc.sip.ivrtest.entity.QueryExecCasePageResponse;
+import com.pccc.sip.ivrtest.entity.request.FillDataRequest;
+import com.pccc.sip.ivrtest.entity.request.QueryExecCasePageRequest;
+import com.pccc.sip.ivrtest.entity.response.QueryExecCasePageResponse;
 
 import java.util.HashMap;
 import java.util.List;

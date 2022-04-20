@@ -1,4 +1,6 @@
-package com.pccc.sip.ivrtest.entity;
+package com.pccc.sip.ivrtest.entity.request;
+
+import com.pccc.sip.ivrtest.entity.ExecuteCaseEntity;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,9 +1,8 @@
 package com.pccc.sip.ivrtest.controller;
 
 import com.pccc.sip.ivrtest.constant.Type;
-import com.pccc.sip.ivrtest.entity.BaseResponse;
+import com.pccc.sip.ivrtest.entity.response.BaseResponse;
 import com.pccc.sip.ivrtest.pojo.DeleteTestCaseRequest;
-import com.pccc.sip.ivrtest.pojo.TestCase;
 import com.pccc.sip.ivrtest.pojo.TestTag;
 import com.pccc.sip.ivrtest.service.TestTagService;
 import org.springframework.beans.factory.annotation.Autowired;

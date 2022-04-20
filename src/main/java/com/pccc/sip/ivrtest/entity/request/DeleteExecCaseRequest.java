@@ -1,4 +1,4 @@
-package com.pccc.sip.ivrtest.entity;
+package com.pccc.sip.ivrtest.entity.request;
 
 import java.util.List;
 

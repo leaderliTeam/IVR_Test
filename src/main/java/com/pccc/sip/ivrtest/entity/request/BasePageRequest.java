@@ -1,4 +1,4 @@
-package com.pccc.sip.ivrtest.entity;
+package com.pccc.sip.ivrtest.entity.request;
 
 public class BasePageRequest {
 

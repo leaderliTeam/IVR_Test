@@ -1,4 +1,4 @@
-package com.pccc.sip.ivrtest.entity;
+package com.pccc.sip.ivrtest.entity.response;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 

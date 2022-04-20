@@ -1,6 +1,4 @@
-package com.pccc.sip.ivrtest.entity;
-
-import java.util.HashMap;
+package com.pccc.sip.ivrtest.entity.request;
 
 public class QueryExecCasePageRequest extends BasePageRequest{
 

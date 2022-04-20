@@ -1,4 +1,4 @@
-package com.pccc.sip.ivrtest.entity;
+package com.pccc.sip.ivrtest.entity.response;
 
 public class ExecuteCaseResponse extends BaseResponse{
 

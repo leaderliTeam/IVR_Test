@@ -1,4 +1,6 @@
-package com.pccc.sip.ivrtest.entity;
+package com.pccc.sip.ivrtest.entity.response;
+
+import com.pccc.sip.ivrtest.entity.ExecuteCaseEntity;
 
 import java.util.List;
 

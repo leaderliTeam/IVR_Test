@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.util.Date;
+import java.util.List;
 
 public class TestCase {
     @TableField(value = "id")
@@ -32,6 +33,7 @@ public class TestCase {
     private String editState;
     @TableField(value = "tag")
     private String tag;
+    private List<TestCase> children;
 
     public String getId() {
         return id;
@@ -135,5 +137,13 @@ public class TestCase {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public List<TestCase> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<TestCase> children) {
+        this.children = children;
     }
 }

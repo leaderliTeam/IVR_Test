@@ -33,4 +33,9 @@ public enum Type {
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
+    public enum AttributeType{
+        MAP,
+        STRING;
+    }
 }

@@ -1,10 +1,12 @@
 package com.pccc.sip.ivrtest.entity;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FillDataRequest {
 
     private String executeBatchNo;
+    private HashMap<String,String> variableData;
     private List<ExecuteCaseEntity> list;
 
     public String getExecuteBatchNo() {
@@ -13,6 +15,14 @@ public class FillDataRequest {
 
     public void setExecuteBatchNo(String executeBatchNo) {
         this.executeBatchNo = executeBatchNo;
+    }
+
+    public HashMap<String, String> getVariableData() {
+        return variableData;
+    }
+
+    public void setVariableData(HashMap<String, String> variableData) {
+        this.variableData = variableData;
     }
 
     public List<ExecuteCaseEntity> getList() {

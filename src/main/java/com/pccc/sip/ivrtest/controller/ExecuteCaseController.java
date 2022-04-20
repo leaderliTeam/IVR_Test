@@ -5,9 +5,11 @@ import com.pccc.sip.ivrtest.engine.EngineRedisQueue;
 import com.pccc.sip.ivrtest.entity.*;
 import com.pccc.sip.ivrtest.service.CommonService;
 import com.pccc.sip.ivrtest.service.ExecuteCaseService;
+import com.pccc.sip.ivrtest.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -84,6 +86,25 @@ public class ExecuteCaseController {
         BaseResponse baseResponse = new BaseResponse();
         if (res == 0){
             baseResponse.setReturnMsg(Type.FAIL);
+        }
+        return baseResponse;
+    }
+
+    @PostMapping("/import")
+    public BaseResponse importExcel(@RequestParam(value = "file") MultipartFile file){
+        String fileName = file.getOriginalFilename();
+        BaseResponse baseResponse = new BaseResponse();
+        if (StringUtils.isNotBlank(fileName) &&
+                !fileName.matches("^.+\\.(?i)(xls)$")
+                && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
+            baseResponse.setReturnMsg(Type.FAIL);
+            baseResponse.setMsg("上传文件格式错误，请检查");
+        }else {
+            List<ExecuteCaseEntity> list = FileUtil.excelToObj(file, ExecuteCaseEntity.class);
+            boolean flag = executeCaseService.insertBatchExecCase(list,null,null);
+            if (!flag){
+                baseResponse.setReturnMsg(Type.FAIL);
+            }
         }
         return baseResponse;
     }

@@ -5,6 +5,7 @@ import com.pccc.sip.ivrtest.entity.FillDataRequest;
 import com.pccc.sip.ivrtest.entity.QueryExecCasePageRequest;
 import com.pccc.sip.ivrtest.entity.QueryExecCasePageResponse;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface ExecuteCaseService {
@@ -14,4 +15,5 @@ public interface ExecuteCaseService {
     QueryExecCasePageResponse queryByPage(QueryExecCasePageRequest queryExecCasePageRequest);
     int updateById(ExecuteCaseEntity executeCaseEntity);
     int deleteBatchIds(List<String> idList);
+    boolean insertBatchExecCase(List<ExecuteCaseEntity> list,String executeBatchNo, HashMap<String,String> map);
 }

@@ -1,17 +1,24 @@
 package com.pccc.sip.ivrtest.entity;
 
-import com.google.gson.JsonObject;
+import com.pccc.sip.ivrtest.annotation.ExcelIndex;
+import com.pccc.sip.ivrtest.constant.Type;
 
 import java.util.HashMap;
 
 public class ExecuteCaseEntity{
 
+    @ExcelIndex(index = 0)
     private String id;
+    @ExcelIndex(index = 2)
     private String caseDesc;
+    @ExcelIndex(index = 1)
     private String executeBatchNo;
+    @ExcelIndex(index = 3,type = Type.AttributeType.MAP)
     private HashMap<String,String> variableData;
     private String used;
+    @ExcelIndex(index = 4)
     private String caseId;
+    @ExcelIndex(index = 5)
     private String executeId;
     private String archiveStatus;
     private String executeCount;
@@ -95,5 +102,21 @@ public class ExecuteCaseEntity{
 
     public void setLastExecuteTime(String lastExecuteTime) {
         this.lastExecuteTime = lastExecuteTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ExecuteCaseEntity{" +
+                "id='" + id + '\'' +
+                ", caseDesc='" + caseDesc + '\'' +
+                ", executeBatchNo='" + executeBatchNo + '\'' +
+                ", variableData=" + variableData +
+                ", used='" + used + '\'' +
+                ", caseId='" + caseId + '\'' +
+                ", executeId='" + executeId + '\'' +
+                ", archiveStatus='" + archiveStatus + '\'' +
+                ", executeCount='" + executeCount + '\'' +
+                ", lastExecuteTime='" + lastExecuteTime + '\'' +
+                '}';
     }
 }

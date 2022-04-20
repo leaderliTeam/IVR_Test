@@ -33,16 +33,12 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
 
     @Override
     public boolean addBatchExecCase(FillDataRequest fillDataRequest) {
-        List<ExecCase> execCases = new ArrayList<>();
-        for (ExecuteCaseEntity executeCaseEntity : Lino.of(fillDataRequest).map(FillDataRequest::getList).get()){
-            execCases.add(executeCaseRequestToExecCase(executeCaseEntity,fillDataRequest.getExecuteBatchNo()));
-        }
-        return execCaseMapper.insertBatch(execCases);
+        return insertBatchExecCase(Lino.of(fillDataRequest).map(FillDataRequest::getList).get(),fillDataRequest.getExecuteBatchNo(),fillDataRequest.getVariableData());
     }
 
     @Override
     public int addExecCase(ExecuteCaseEntity executeCaseEntity) {
-        return execCaseMapper.insert(executeCaseRequestToExecCase(executeCaseEntity,null));
+        return execCaseMapper.insert(executeCaseRequestToExecCase(executeCaseEntity,null,null));
     }
 
     @Override
@@ -85,6 +81,16 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
         return execCaseMapper.deleteBatchIds(idList);
     }
 
+    @Override
+    public boolean insertBatchExecCase(List<ExecuteCaseEntity> list,String executeBatchNo,HashMap<String,String> map) {
+        List<ExecCase> execCases = new ArrayList<>();
+        for (ExecuteCaseEntity executeCaseEntity : list){
+            execCases.add(executeCaseRequestToExecCase(executeCaseEntity,executeBatchNo,map));
+        }
+        return execCaseMapper.insertBatch(execCases);
+
+    }
+
     private void queryWrapperEq(QueryWrapper execCaseQueryWrapper,String key,String value){
         if (StringUtils.isNotBlank(value)){
             execCaseQueryWrapper.eq(key,value);
@@ -110,14 +116,14 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
         return caseEntityList;
     }
 
-    private ExecCase executeCaseRequestToExecCase(ExecuteCaseEntity executeCaseEntity, String executeBatchNo){
+    private ExecCase executeCaseRequestToExecCase(ExecuteCaseEntity executeCaseEntity, String executeBatchNo,HashMap<String,String> map){
         ExecCase execCase = new ExecCase();
         String id = StringUtils.isNotBlank(executeCaseEntity.getId())? executeCaseEntity.getId():commonService.creatExecCaseId();
         execCase.setId(id);
         execCase.setCaseDesc(executeCaseEntity.getCaseDesc());
         Integer batchNo = Integer.valueOf(StringUtils.isNotBlank(executeBatchNo)?executeBatchNo: executeCaseEntity.getExecuteBatchNo());
         execCase.setBatch(batchNo);
-        execCase.setParams(GsonUtil.GsonString(executeCaseEntity.getVariableData()));
+        execCase.setParams(GsonUtil.GsonString(map!=null ? map :executeCaseEntity.getVariableData()));
         execCase.setIsUsed(Type.ENABLE.getType());
         execCase.setTestCaseId(executeCaseEntity.getCaseId());
         execCase.setPreExecCaseId(executeCaseEntity.getExecuteId());

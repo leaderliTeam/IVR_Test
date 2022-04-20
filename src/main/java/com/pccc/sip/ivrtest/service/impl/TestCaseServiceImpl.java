@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,6 +53,30 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
         return null;
     }
 
+    //单链树
+    public TestCase getSingleTestCasesById(String id){
+        //查顶级
+        String topId = getTopId(id);
+        TestCase testCase = testCaseMapper.selectOne(new QueryWrapper<TestCase>());
+        queryChildren(testCase);
+        return getParentNode(testCase);
+    }
+
+    private TestCase getParentNode(TestCase testCase){
+        //当前ID查父级
+        List<TestCase> list = new ArrayList<>();
+        list.add(testCase);
+        TestCase parentTestCase = testCaseMapper.selectOne(new QueryWrapper<TestCase>());
+        if (parentTestCase == null){
+            return testCase;
+        }
+        parentTestCase.setChildren(list);
+        if (StringUtils.isNotBlank(parentTestCase.getFrontCaseId())){
+            getParentNode(parentTestCase);
+        }
+        return parentTestCase;
+    }
+
     //根据ID查树
     public List<TestCase> getTestCasesById(String id){
         //查顶级
@@ -60,11 +85,10 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
     }
 
     private String getTopId(String id){
-
         //当前ID查父级
         TestCase testCase = testCaseMapper.selectOne(new QueryWrapper<TestCase>());
         if (StringUtils.isNotBlank(testCase.getFrontCaseId())){
-            return getTopId(testCase.getFrontCaseId());
+            getTopId(testCase.getFrontCaseId());
         }
         return testCase.getId();
     }
@@ -80,12 +104,16 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
 
     private void getChildren(List<TestCase> childTestCases){
         for (TestCase testCase:childTestCases){
-            String parentId = testCase.getId();
-            List<TestCase> children= testCaseMapper.selectList(new QueryWrapper<TestCase>());
-            if (children!=null && children.size()>0){
-                testCase.setChildren(children);
-                getChildren(children);
-            }
+            queryChildren(testCase);
+        }
+    }
+
+    private void queryChildren(TestCase testCase){
+        String parentId = testCase.getId();
+        List<TestCase> children= testCaseMapper.selectList(new QueryWrapper<TestCase>());
+        if (children!=null && children.size()>0){
+            testCase.setChildren(children);
+            getChildren(children);
         }
     }
 

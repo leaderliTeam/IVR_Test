@@ -13,10 +13,14 @@ import com.pccc.sip.ivrtest.service.CommonService;
 import com.pccc.sip.ivrtest.service.ExecuteCaseService;
 import com.pccc.sip.ivrtest.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 @RestController
@@ -114,4 +118,33 @@ public class ExecuteCaseController {
         }
         return baseResponse;
     }
+
+    @GetMapping("/export")
+    public void exportExcel(@RequestParam(value = "type",required = false) String type, HttpServletResponse response){
+        OutputStream outputStream = null;
+        Workbook workbook = null;
+        try {
+            String fileName = FileUtil.getExcelFileName(type,"执行案例数据",true);
+            response.addHeader("Content-Disposition", "filename=" + fileName);
+            outputStream = response.getOutputStream();
+            String[] titles = new String[]{"执行案例编号","批次号","案例描述","变量数据","是否启用","关联测试编号","前置执行案例编号","是否归档","执行次数","最后执行时间"};
+            workbook = FileUtil.objToExcel(type,titles,executeCaseService.queryAllList());
+            workbook.write(outputStream);
+            outputStream.flush();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (outputStream!=null){
+                    outputStream.close();
+                }
+                if (workbook!=null){
+                    workbook.close();
+                }
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

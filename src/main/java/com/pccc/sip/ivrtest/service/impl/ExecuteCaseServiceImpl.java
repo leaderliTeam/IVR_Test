@@ -91,6 +91,11 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
 
     }
 
+    @Override
+    public List<ExecCase> queryAllList() {
+        return execCaseMapper.selectList(new QueryWrapper<>());
+    }
+
     private void queryWrapperEq(QueryWrapper execCaseQueryWrapper,String key,String value){
         if (StringUtils.isNotBlank(value)){
             execCaseQueryWrapper.eq(key,value);

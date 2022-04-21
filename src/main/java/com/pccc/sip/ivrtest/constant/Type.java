@@ -8,7 +8,9 @@ public enum Type {
     DISABLE("0","停用/未归档"),
     ALL("2","全部"),
     SUCCESS("0","success"),
-    FAIL("-1","fail");
+    FAIL("-1","fail"),
+    XLS("xls"),
+    XLSX("xlsx");
 
     private String type;
     private String typeName;
@@ -16,6 +18,10 @@ public enum Type {
     Type(String type,String typeName) {
         this.type = type;
         this.typeName = typeName;
+    }
+
+    Type(String type) {
+        this.type = type;
     }
 
     public String getType() {
@@ -36,6 +42,7 @@ public enum Type {
 
     public enum AttributeType{
         MAP,
-        STRING;
+        STRING,
+        DATE;
     }
 }

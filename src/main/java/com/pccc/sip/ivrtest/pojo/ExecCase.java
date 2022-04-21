@@ -1,26 +1,31 @@
 package com.pccc.sip.ivrtest.pojo;
 
+import com.pccc.sip.ivrtest.annotation.ExcelIndex;
+import com.pccc.sip.ivrtest.constant.Type;
+
 import java.util.Date;
 
 public class ExecCase {
+
+    @ExcelIndex(index = 0)
     private String id;
-
+    @ExcelIndex(index = 1)
     private Integer batch;
-
+    @ExcelIndex(index = 2)
     private String caseDesc;
-
+    @ExcelIndex(index = 3)
     private String params;
-
+    @ExcelIndex(index =4)
     private String isUsed;
-
+    @ExcelIndex(index = 5)
     private String testCaseId;
-
+    @ExcelIndex(index = 6)
     private String preExecCaseId;
-
+    @ExcelIndex(index = 7)
     private String isArchived;
-
+    @ExcelIndex(index = 8)
     private Integer execTimes;
-
+    @ExcelIndex(index = 9,type = Type.AttributeType.DATE)
     private Date lastTime;
 
     public String getId() {

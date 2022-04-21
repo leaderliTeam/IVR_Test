@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * index 标记元素在 excel表格中的行所在位置
+ * index 标记元素在 excel表格中所在行对应的位置下标
  * type 标记元素的类型，区别是否需要特殊处理
  */
 @Target(ElementType.FIELD)

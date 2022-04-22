@@ -71,4 +71,13 @@ public class GsonUtil {
         }
         return null;
     }
+
+    public static JsonObject readerJsonObject(String fileName){
+        try (JsonReader jsonReader = gson.newJsonReader(new InputStreamReader(GsonUtil.class.getClassLoader().getResourceAsStream(fileName)))){
+            return gson.fromJson(jsonReader,JsonObject.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

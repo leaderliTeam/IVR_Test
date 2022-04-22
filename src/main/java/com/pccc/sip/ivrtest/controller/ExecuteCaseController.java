@@ -11,6 +11,7 @@ import com.pccc.sip.ivrtest.entity.response.ExecuteCaseResponse;
 import com.pccc.sip.ivrtest.entity.response.QueryExecCasePageResponse;
 import com.pccc.sip.ivrtest.service.CommonService;
 import com.pccc.sip.ivrtest.service.ExecuteCaseService;
+import com.pccc.sip.ivrtest.util.ExcelInformationUtil;
 import com.pccc.sip.ivrtest.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -124,11 +125,10 @@ public class ExecuteCaseController {
         OutputStream outputStream = null;
         Workbook workbook = null;
         try {
-            String fileName = FileUtil.getExcelFileName(type,"执行案例数据",true);
+            String fileName = FileUtil.getExcelFileName(type, ExcelInformationUtil.getString("execCaseExport","name"),true);
             response.addHeader("Content-Disposition", "filename=" + fileName);
             outputStream = response.getOutputStream();
-            String[] titles = new String[]{"执行案例编号","批次号","案例描述","变量数据","是否启用","关联测试编号","前置执行案例编号","是否归档","执行次数","最后执行时间"};
-            workbook = FileUtil.objToExcel(type,titles,executeCaseService.queryAllList());
+            workbook = FileUtil.objToExcel(type,ExcelInformationUtil.getStringArray("execCaseExport","title"),executeCaseService.queryAllList());
             workbook.write(outputStream);
             outputStream.flush();
         }catch (IOException e) {

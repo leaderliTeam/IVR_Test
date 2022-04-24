@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -185,6 +184,8 @@ public class FileUtil {
                 String value ;
                 if (Type.AttributeType.DATE == excelIndex.type()){
                     value = format.format((Date) obj);
+                }else if(Type.AttributeType.MAP == excelIndex.type()){
+                    value = GsonUtil.GsonString(obj);
                 }else {
                     value = String.valueOf(obj);
                 }

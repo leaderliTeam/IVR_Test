@@ -49,10 +49,10 @@ public class ExecuteCaseServiceImpl implements ExecuteCaseService {
         queryWrapperEq(execCaseQueryWrapper,"id",queryExecCasePageRequest.getId());
         queryWrapperEq(execCaseQueryWrapper,"batch",queryExecCasePageRequest.getExecuteBatchNo());
         if (!StringUtils.equals(Type.ALL.getType(),queryExecCasePageRequest.getUsed())){
-            queryWrapperEq(execCaseQueryWrapper,"isUsed",queryExecCasePageRequest.getUsed());
+            queryWrapperEq(execCaseQueryWrapper,"is_used",queryExecCasePageRequest.getUsed());
         }
         if (!StringUtils.equals(Type.ALL.getType(),queryExecCasePageRequest.getArchiveStatus())) {
-            queryWrapperEq(execCaseQueryWrapper,"isArchived", queryExecCasePageRequest.getArchiveStatus());
+            queryWrapperEq(execCaseQueryWrapper,"is_archived", queryExecCasePageRequest.getArchiveStatus());
         }
         execCaseMapper.selectPage(page,execCaseQueryWrapper);
 

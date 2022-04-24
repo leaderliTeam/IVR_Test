@@ -10,7 +10,8 @@ public enum Type {
     SUCCESS("0","success"),
     FAIL("-1","fail"),
     XLS("xls"),
-    XLSX("xlsx");
+    XLSX("xlsx"),
+    EXECINFO("exec_info_");
 
     private String type;
     private String typeName;

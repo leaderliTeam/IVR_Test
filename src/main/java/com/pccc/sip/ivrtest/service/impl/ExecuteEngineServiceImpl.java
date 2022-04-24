@@ -1,6 +1,7 @@
 package com.pccc.sip.ivrtest.service.impl;
 
 import com.pccc.sip.ivrtest.config.JedisTemplate;
+import com.pccc.sip.ivrtest.constant.Type;
 import com.pccc.sip.ivrtest.mapper.ExecCaseMapper;
 import com.pccc.sip.ivrtest.mapper.ExecCaseResultMapper;
 import com.pccc.sip.ivrtest.mapper.TestCaseMapper;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExecuteEngineServiceImpl implements ExecuteEngineService {
 
-    private static final String EXECINFO="exec_info_";
     @Autowired
     private ExecCaseMapper execCaseMapper;
     @Autowired
@@ -58,7 +58,7 @@ public class ExecuteEngineServiceImpl implements ExecuteEngineService {
     public void addExecCaseResult(ExecCaseResult execCaseResult) {
         if (1 == execCaseResultMapper.addExecCaseResult(execCaseResult)) {
             if (null != execCaseResult.getId() && StringUtils.isNotBlank(execCaseResult.getExecInfo())) {
-                jedisTemplate.setCacheWithExpireTime(EXECINFO + execCaseResult.getId(), execCaseResult.getExecInfo(), 7 * 24 * 60 * 60 * 1000L);
+                jedisTemplate.setCacheWithExpireTime(Type.EXECINFO.getType() + execCaseResult.getId(), execCaseResult.getExecInfo(), 7 * 24 * 60 * 60 * 1000L);
             }
         }
     }

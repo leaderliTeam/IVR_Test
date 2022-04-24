@@ -1,5 +1,7 @@
 package com.pccc.sip.ivrtest.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.util.Date;
 
 public class ExecCaseResult {
@@ -19,6 +21,7 @@ public class ExecCaseResult {
 
     private Date endTime;
 
+    @TableField(exist = false)
     private String execInfo;
 
     public String getExecInfo() {

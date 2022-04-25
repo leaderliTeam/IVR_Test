@@ -1,0 +1,16 @@
+[
+  {
+    "id": "IVRE202204190030",
+    "caseId": "IVRT202204190003",
+    "executeId": "IVRE202204190031",
+    "used": "1",
+    "variableData": {
+      "AccNo": "62222222555|65555232322222",
+      "PassWord": "111111|222222|333333",
+      "Asr": "查询账单|查询额度",
+      "FlowCode": "flowcode_10008",
+      "balance": "100",
+      "debt": "1000"
+    }
+  }
+]

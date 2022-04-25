@@ -29,7 +29,7 @@ public class ExcelInformationUtil {
                     s = json.get(keys[i]).getAsString();
                 }
             }else {
-                json = jsonObject.getAsJsonObject(keys[i]);
+                json = getJsonObject(json,i,keys);
             }
         }
         return s;
@@ -52,7 +52,7 @@ public class ExcelInformationUtil {
                     array = json.get(keys[i]).getAsJsonArray();
                 }
             }else {
-                json = jsonObject.getAsJsonObject(keys[i]);
+                json = getJsonObject(json,i,keys);
             }
         }
         String[] s = new String[array.size()];
@@ -60,6 +60,14 @@ public class ExcelInformationUtil {
             s[j] = array.get(j).getAsString();
         }
         return s;
+    }
+
+    private static JsonObject getJsonObject(JsonObject json,int index,String... keys){
+        if (index == 0){
+            return jsonObject.getAsJsonObject(keys[index]);
+        }else {
+            return json.getAsJsonObject(keys[index]);
+        }
     }
 
 

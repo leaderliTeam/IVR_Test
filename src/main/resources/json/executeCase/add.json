@@ -1,0 +1,16 @@
+{
+  "caseDesc":"测试11",
+  "executeBatchNo":"100",
+  "caseId": "IVRT202204020002",
+  "executeId": "",
+  "used": "1",
+  "archiveStatus":"0",
+  "variableData": {
+    "AccNo": "61111111111|65555232322222",
+    "PassWord": "111111|222222|333333",
+    "Asr": "查询账单|查询额度",
+    "FlowCode": "flowcode_10008",
+    "balance": "100",
+    "debt": "1000"
+  }
+}

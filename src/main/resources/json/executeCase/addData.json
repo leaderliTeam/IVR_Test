@@ -1,0 +1,21 @@
+{
+  "executeBatchNo": "110",
+  "variableData": {
+    "AcNo": "62222222555|65555232322222",
+    "PassWord": "111111|222222|333333",
+    "Asr": "查询账单|查询额度",
+    "FlowCode": "flowcode_10008",
+    "balance": "100",
+    "debt": "1000"
+  },
+  "list": [
+    {
+      "caseDesc": "查询账单",
+      "caseId": "IVRT202204020001"
+    },
+    {
+      "caseDesc": "查询余额",
+      "caseId": "IVRT202204020002"
+    }
+  ]
+}
